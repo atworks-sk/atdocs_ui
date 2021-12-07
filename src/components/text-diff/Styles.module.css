@@ -1,0 +1,18 @@
+html {
+    margin: 8px;
+}
+
+.input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text {
+    resize: none;
+    width: 48%;
+}
+
+.submit {
+    display: block;
+    margin: 10px auto;
+}
