@@ -1,0 +1,13 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+    },
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "prettier-eslint.eslintIntegration": true,
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "[javascript]": {
+        "editor.formatOnSave": true
+    }
+}
