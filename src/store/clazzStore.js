@@ -46,7 +46,8 @@ export const searchClazzListSetForm = (searchClazzListForm) => ({
 });
 export const searchClazzListFormInitData = () => {
     return {
-        projectName: '',
+        clazzName: '',
+        projectId: '',
         page: 1,
         size: 10
     };
@@ -64,8 +65,7 @@ export function* clazzSaga() {
 
 // initialState 쪽도 반복되는 코드를 initial() 함수를 사용해서 리팩토링 했습니다.
 const initialState = {
-    // searchClazzListForm: searchProjectListFormInitData(),
-    searchClazzListForm: {},
+    searchClazzListForm: searchClazzListFormInitData(),
     searchClazzListRes: reducerUtils.initial()
 };
 
@@ -88,7 +88,7 @@ export default function bulktest(state = initialState, action) {
         case SEARCH_CLAZZ_LIST_SET_FORM:
             return {
                 ...state,
-                searchProjectListForm: action.payload.searchProjectListForm
+                searchClazzListForm: action.payload.searchClazzListForm
             };
 
         default:

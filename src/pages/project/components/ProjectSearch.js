@@ -3,12 +3,14 @@ import {Container, Row, Col, Form} from 'react-bootstrap';
 import {Button, Card, Spinner} from '@components';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import {
     searchProjectList,
     searchProjectListClear,
     searchProjectListSetForm,
     searchProjectListFormInitData
 } from '../../../store/projectStore';
+import {getErrorMsg} from '../../../lib/commonUiUtils';
 
 /*
  * Project 검색조건 Contanier
@@ -53,7 +55,7 @@ const ProjectSearch = () => {
      */
     useEffect(() => {
         if (!searchLoading && searchError) {
-            // toast.error(getErrorMsg(searchError, 'search'));
+            toast.error(getErrorMsg(searchError, 'search'));
             dispatch(searchProjectListClear());
         }
     }, [searchError]);

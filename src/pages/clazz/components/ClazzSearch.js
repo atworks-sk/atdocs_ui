@@ -4,7 +4,14 @@ import {Container, Row, Col, Form} from 'react-bootstrap';
 import {Button, Card, Spinner} from '@components';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import {searchClazzList, searchClazzListClear} from '../../../store/clazzStore';
+import {toast} from 'react-toastify';
+import {
+    searchClazzList,
+    searchClazzListClear,
+    searchClazzListFormInitData,
+    searchClazzListSetForm
+} from '../../../store/clazzStore';
+import {getErrorMsg} from '../../../lib/commonUiUtils';
 
 /*
  * Project 검색조건 Contanier
@@ -20,6 +27,10 @@ const ClazzSearch = () => {
         (state) => state.project.searchProjectListRes
     );
 
+    const {data: projectList} = useSelector(
+        (state) => state.common.projectList
+    );
+
     const onSearchList = (_seachFrom = searchForm) => {
         dispatch(searchClazzList(_seachFrom));
     };
@@ -30,18 +41,18 @@ const ClazzSearch = () => {
     const onClickSearch = () => {
         // page만 1page로 변경하여 조회 이벤트 호출
         const searchFormT = {...searchForm};
-        // searchFormT.page = 1;
-        // dispatch(searchProjectListSetForm(searchFormT));
+        searchFormT.page = 1;
+        dispatch(searchClazzListSetForm(searchFormT));
         onSearchList(searchFormT);
     };
 
     /*
      * 조회 조건 변경시
      */
-    const onChangerFormData = () => {
-        // const searchFormT = {...searchForm};
-        // searchFormT[e.target.id] = e.target.value;
-        // dispatch(searchProjectListSetForm(searchFormT));
+    const onChangerFormData = (e) => {
+        const searchFormT = {...searchForm};
+        searchFormT[e.target.id] = e.target.value;
+        dispatch(searchClazzListSetForm(searchFormT));
     };
 
     /*
@@ -49,20 +60,20 @@ const ClazzSearch = () => {
      */
     useEffect(() => {
         if (!searchLoading && searchError) {
-            // toast.error(getErrorMsg(searchError, 'search'));
-            // dispatch(searchProjectListClear());
+            toast.error(getErrorMsg(searchError, 'search'));
+            dispatch(searchClazzListClear());
         }
     }, [searchError]);
 
     useEffect(() => {
         if (history.action === 'PUSH') {
-            // const initData = searchProjectListFormInitData();
-            // dispatch(searchProjectListSetForm(initData));
-            // onSearchList(initData);
+            const initData = searchClazzListFormInitData();
+            dispatch(searchClazzListSetForm(initData));
+            onSearchList(initData);
         }
         // 뒤로가기로 온 경우
         if (history.action === 'POP') {
-            // onSearchList();
+            onSearchList();
         }
     }, []);
 
@@ -75,6 +86,33 @@ const ClazzSearch = () => {
                     <>
                         <Container fluid onKeyPress={onClickSearch}>
                             <Row>
+                                <Col xs="2">
+                                    <Form.Group>
+                                        <Form.Label>프로젝트</Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            id="projectId"
+                                            onChange={onChangerFormData}
+                                            value={
+                                                (searchForm &&
+                                                    searchForm.projectId) ||
+                                                ''
+                                            }
+                                        >
+                                            <option value="">전체</option>{' '}
+                                            {projectList &&
+                                                projectList.data.map((obj) => (
+                                                    <option
+                                                        key={obj.id}
+                                                        value={obj.id}
+                                                    >
+                                                        {obj.projectName}
+                                                    </option>
+                                                ))}{' '}
+                                            {/* */}
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
                                 <Col xs="3">
                                     <Form.Group>
                                         <Form.Label>클래스 명</Form.Label>
@@ -91,7 +129,7 @@ const ClazzSearch = () => {
                                         />
                                     </Form.Group>
                                 </Col>
-                                <Col xs="8" />
+                                <Col xs="6" />
                                 <Col xs="1">
                                     <Form.Group>
                                         <Form.Label />

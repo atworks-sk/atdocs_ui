@@ -4,9 +4,16 @@ import axios from 'axios';
 /*
  * project list 조회
  */
-export const searchClazzList = async ({page = 1, size = 10}) => {
+export const searchClazzList = async ({
+    clazzName,
+    projectId = -1,
+    page = 1,
+    size = 10
+}) => {
     const response = await axios.get(
-        `/clazz/searchList?sort=id,asc&page=${page - 1}&size=${size}`
+        `/clazz/searchList?sort=id,asc&projectId=${projectId}&clazzName=${clazzName}&page=${
+            page - 1
+        }&size=${size}`
     );
     return response;
 };

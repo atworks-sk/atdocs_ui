@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Switch} from 'react-router-dom';
-
+import {useDispatch} from 'react-redux';
 import DashBoard from '@pages/dashboard/Dashboard';
 import Project from '@pages/project/Project';
 import Clazz from '@pages/clazz/Clazz';
@@ -9,7 +9,10 @@ import Header from './header/Header';
 import Footer from './footer/Footer';
 import PageLoading from '../../components/page-loading/PageLoading';
 
+import {getProjectList} from '../../store/commonStore';
+
 const Main = () => {
+    const dispatch = useDispatch();
     const [appLoadingState, updateAppLoading] = useState(true);
 
     // common loading
@@ -22,7 +25,7 @@ const Main = () => {
     };
 
     useEffect(() => {
-        // dispatch(getUserInfo());
+        dispatch(getProjectList());
         // dispatch(searchServer(''));
         // dispatch(searchCode());
         // dispatch(searchMember());
