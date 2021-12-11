@@ -6,10 +6,9 @@ const PageLoading = () => {
         <div className={classes.loading}>
             <span>a</span>
             <span>T</span>
-            <span>w</span>
+            <span>d</span>
             <span>o</span>
-            <span>r</span>
-            <span>k</span>
+            <span>c</span>
             <span>s</span>
         </div>
     );

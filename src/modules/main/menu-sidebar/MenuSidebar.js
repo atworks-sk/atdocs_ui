@@ -30,36 +30,36 @@ const MenuSidebar = () => {
                         </li>
                         <li key="server" className="nav-item">
                             <NavLink to="/project" exact className="nav-link">
-                                <i className="nav-icon fas fa-database" />
+                                <i className="nav-icon fas fa-book" />
                                 <p>프로젝트</p>
                             </NavLink>
                         </li>
                         <li key="snapshot" className="nav-item">
                             <NavLink to="/server" exact className="nav-link">
-                                <i className="nav-icon fas fa-database" />
+                                <i className="nav-icon fas fa-camera" />
                                 <p>스냅샷</p>
                             </NavLink>
                         </li>
                         <li key="snapshot" className="nav-item">
                             <NavLink to="/clazz" exact className="nav-link">
-                                <i className="nav-icon fas fa-database" />
+                                <i className="nav-icon fas fa-file" />
                                 <p>클래스</p>
                             </NavLink>
                         </li>
                         <li key="method" className="nav-item">
-                            <NavLink to="/clazz" exact className="nav-link">
+                            <NavLink to="/method" exact className="nav-link">
                                 <i className="nav-icon fas fa-database" />
                                 <p>메소드</p>
                             </NavLink>
                         </li>
                         <li key="api" className="nav-item">
-                            <NavLink to="/clazz" exact className="nav-link">
-                                <i className="nav-icon fas fa-database" />
+                            <NavLink to="/api" exact className="nav-link">
+                                <i className="nav-icon fas fa-search" />
                                 <p>API 찾기</p>
                             </NavLink>
                         </li>
                         <li key="book" className="nav-item">
-                            <NavLink to="/clazz" exact className="nav-link">
+                            <NavLink to="/book" exact className="nav-link">
                                 <i className="nav-icon fas fa-database" />
                                 <p>업무정의</p>
                             </NavLink>

@@ -33,7 +33,7 @@
         "antd": "^4.16.5",
         "axios": "^0.21.1",
         "bootstrap": "^5.0.2",
-        "craco": "^0.0.3",
+        "craco": "0.0.3",
         "create-react-app": "^4.0.3",
         "datatable": "^2.0.2",
         "faker": "^5.5.3",

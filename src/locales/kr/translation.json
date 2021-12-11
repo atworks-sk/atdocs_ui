@@ -1,3 +1,19 @@
 {
-    "label": "회원가입"
+    "sample":"test",
+    "common":{
+        "menu":{
+            "home":"Home",
+            "project":"프로젝트",
+            "snapshot":"스냅샷",
+            "clazz":"클래스"
+        },
+        "menuDesc":{
+            "home":"Home",
+            "project":"프로젝트 관리",
+            "snapshot":"스냅샷",
+            "clazz":"클래스 관리"
+        }
+
+    }
+    
 }

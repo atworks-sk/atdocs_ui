@@ -43,7 +43,7 @@ axios.interceptors.response.use(
  * toast settting
  ************************************************ */
 toast.configure({
-    autoClose: 3000,
+    autoClose: 3001,
     draggable: false,
     position: 'top-right',
     hideProgressBar: false,

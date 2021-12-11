@@ -6,7 +6,12 @@ import translationKR from './locales/kr/translation.json';
 
 // the translations
 const resources = {
-    translation: translationKR
+    en: {
+        translation: translationKR
+    },
+    kr: {
+        translation: translationKR
+    }
 };
 
 i18n.use(initReactI18next) // passes i18n down to react-i18next

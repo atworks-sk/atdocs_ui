@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://localhost:9790',
+            target: 'http://localhost:9760',
             changeOrigin: true
         })
     );
@@ -12,7 +12,7 @@ module.exports = function (app) {
     app.use(
         '/no-auth-api',
         createProxyMiddleware({
-            target: 'http://localhost:9790',
+            target: 'http://localhost:9760',
             changeOrigin: true
         })
     );

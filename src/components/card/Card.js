@@ -31,7 +31,7 @@ const AppCard = ({title = '제목 넣어주세요.', body}) => {
         }
     };
     return (
-        <Card style={{borderTop: '3px solid #007bff'}}>
+        <Card style={{borderTop: '3px solid #008000'}}>
             <Card.Header>
                 {title}
                 <button

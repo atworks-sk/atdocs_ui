@@ -105,12 +105,12 @@ export const getErrorMsg = (errorRes, type) => {
         returnMsg = type;
     }
 
-    if (errorRes && errorRes.response && errorRes.response.statusText) {
-        returnMsg += `\n${errorRes.response.statusText}`;
-    }
-    if (errorRes && errorRes.response && errorRes.response.status) {
-        returnMsg += ` [${errorRes.response.status}]`;
-    }
+    // if (errorRes && errorRes.response && errorRes.response.statusText) {
+    //     returnMsg += `\n${errorRes.response.statusText}`;
+    // }
+    // if (errorRes && errorRes.response && errorRes.response.status) {
+    //     returnMsg += `\n (${errorRes.response.status})`;
+    // }
 
     return returnMsg;
 };

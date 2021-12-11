@@ -1,17 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-// import Dashboard from '@pages/Dashboard';
-// import ServerContainer from '@app/containers/server/ServerContainer';
-
 import DashBoard from '@pages/dashboard/Dashboard';
+import Project from '@pages/project/Project';
+import Clazz from '@pages/clazz/Clazz';
 import MenuSidebar from '@modules/main/menu-sidebar/MenuSidebar';
 import Header from './header/Header';
-// eslint-disable-next-line no-unused-vars
 import Footer from './footer/Footer';
 import PageLoading from '../../components/page-loading/PageLoading';
-// import MenuSidebar from './menu-sidebar/MenuSidebar';
-// import MenuSidebarContainer from '../../containers/main/MenuSidebarContainer';
 
 const Main = () => {
     const [appLoadingState, updateAppLoading] = useState(true);
@@ -51,13 +47,6 @@ const Main = () => {
         // });
     };
 
-    // document.getElementById('root').classList.remove('register-page');
-    // document.getElementById('root').classList.remove('login-page');
-    // document.getElementById('root').classList.remove('hold-transition');
-    // document.getElementById('root').className += ' sidebar-mini';
-    // document.getElementById('root').classList.add('sidebar-open');
-    // document.getElementById('root').classList.remove('sidebar-collapse');
-
     return (
         <>
             <div className="wrapper">
@@ -68,9 +57,9 @@ const Main = () => {
                 <div className="content-wrapper">
                     <section className="content">
                         <Switch>
-                            {/* <Route exact path="/profile" component={Profile} /> */}
-
                             <Route exact path="/" component={DashBoard} />
+                            <Route exact path="/project" component={Project} />
+                            <Route exact path="/clazz" component={Clazz} />
                         </Switch>
                     </section>
                 </div>

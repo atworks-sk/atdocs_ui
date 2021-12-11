@@ -6,7 +6,9 @@ import {Link} from 'react-router-dom';
 const ContentHeader = ({title}) => {
     const [t] = useTranslation();
     const links = {
-        server: [{id: 0, text: t('menusidebar.label.home'), link: '/'}]
+        project: [{id: 0, text: t('common.menu.home'), link: '/'}],
+        clazz: [{id: 0, text: t('common.menu.home'), link: '/'}],
+        snapshot: [{id: 0, text: t('common.menu.home'), link: '/'}]
     };
 
     const listItem = links[title].map((obj, index) => (
@@ -21,14 +23,13 @@ const ContentHeader = ({title}) => {
             <div className="container-fluid">
                 <div className="row mb-2">
                     <div className="col-sm-6">
-                        <h1>{t(`menusidebar.label.${title}`)}</h1>
+                        <h4>{t(`common.menuDesc.${title}`)}</h4>
                     </div>
                     <div className="col-sm-6">
                         <ol className="breadcrumb float-sm-right">
                             {listItem}
-
                             <li key="me" className="breadcrumb-item active">
-                                {t(`menusidebar.label.${title}`)}
+                                {t(`common.menu.${title}`)}
                             </li>
                         </ol>
                     </div>
