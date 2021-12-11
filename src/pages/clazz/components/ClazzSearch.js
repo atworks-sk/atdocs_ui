@@ -77,16 +77,16 @@ const ClazzSearch = () => {
                             <Row>
                                 <Col xs="3">
                                     <Form.Group>
-                                        <Form.Label>프로젝트 명</Form.Label>
+                                        <Form.Label>클래스 명</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder="Project A"
+                                            placeholder="Class A"
                                             maxLength="40"
-                                            id="projectName"
+                                            id="clazzName"
                                             onChange={onChangerFormData}
                                             value={
                                                 searchForm &&
-                                                searchForm.projectName
+                                                searchForm.clazzName
                                             }
                                         />
                                     </Form.Group>
