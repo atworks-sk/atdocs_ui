@@ -16,13 +16,15 @@ const Clazz = () => {
                     <Col xs="12">
                         <ContentHeader title="clazz" />
                     </Col>
-                    <Col xs="12">
+                    {/* <Col xs="12">
                         <Button className="float-left" theme="link">
                             + 프로젝트 추가
                         </Button>
+                    </Col> */}
+                    <Col xs="12">
+                        <ClazzSearch />
                     </Col>
                 </Row>
-                <ClazzSearch />
             </Container>
         </>
     );

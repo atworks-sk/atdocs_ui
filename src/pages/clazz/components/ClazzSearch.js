@@ -4,6 +4,7 @@ import {Container, Row, Col, Form} from 'react-bootstrap';
 import {Button, Card, Spinner} from '@components';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import {searchClazzList, searchClazzListClear} from '../../../store/clazzStore';
 
 /*
  * Project 검색조건 Contanier
@@ -12,15 +13,15 @@ const ClazzSearch = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const {searchProjectListForm: searchForm} = useSelector(
-        (state) => state.project
+    const {searchClazzListForm: searchForm} = useSelector(
+        (state) => state.clazz
     );
     const {loading: searchLoading, error: searchError} = useSelector(
         (state) => state.project.searchProjectListRes
     );
 
     const onSearchList = (_seachFrom = searchForm) => {
-        // dispatch(searchProjectList(_seachFrom));
+        dispatch(searchClazzList(_seachFrom));
     };
 
     /*
@@ -28,10 +29,10 @@ const ClazzSearch = () => {
      */
     const onClickSearch = () => {
         // page만 1page로 변경하여 조회 이벤트 호출
-        // const searchFormT = {...searchForm};
+        const searchFormT = {...searchForm};
         // searchFormT.page = 1;
         // dispatch(searchProjectListSetForm(searchFormT));
-        // onSearchList(searchFormT);
+        onSearchList(searchFormT);
     };
 
     /*
