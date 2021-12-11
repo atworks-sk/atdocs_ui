@@ -6,16 +6,24 @@ import dashboard, {dashboardSaga} from './dashboard';
 import common, {commonSaga} from './commonStore';
 import project, {projectSaga} from './projectStore';
 import clazz, {clazzSaga} from './clazzStore';
+import method, {methodSaga} from './methodStore';
 
 const rootReducer = combineReducers({
     commonUI,
     common,
     project,
     dashboard,
-    clazz
+    clazz,
+    method
 });
 export function* rootSaga() {
-    yield all([commonSaga(), dashboardSaga(), projectSaga(), clazzSaga()]); // all 은 배열 안의 여러 사가를 동시에 실행시켜줍니다.
+    yield all([
+        commonSaga(),
+        dashboardSaga(),
+        projectSaga(),
+        clazzSaga(),
+        methodSaga()
+    ]); // all 은 배열 안의 여러 사가를 동시에 실행시켜줍니다.
 }
 
 export default rootReducer;

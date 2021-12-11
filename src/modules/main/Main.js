@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import DashBoard from '@pages/dashboard/Dashboard';
 import Project from '@pages/project/Project';
 import Clazz from '@pages/clazz/Clazz';
+import Method from '@pages/method/Method';
 import MenuSidebar from '@modules/main/menu-sidebar/MenuSidebar';
 import Header from './header/Header';
 import Footer from './footer/Footer';
@@ -63,6 +64,7 @@ const Main = () => {
                             <Route exact path="/" component={DashBoard} />
                             <Route exact path="/project" component={Project} />
                             <Route exact path="/clazz" component={Clazz} />
+                            <Route exact path="/method" component={Method} />
                         </Switch>
                     </section>
                 </div>

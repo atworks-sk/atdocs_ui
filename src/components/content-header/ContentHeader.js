@@ -5,10 +5,13 @@ import {Link} from 'react-router-dom';
 
 const ContentHeader = ({title}) => {
     const [t] = useTranslation();
+
+    const homeText = t('common.menu.home');
     const links = {
-        project: [{id: 0, text: t('common.menu.home'), link: '/'}],
-        clazz: [{id: 0, text: t('common.menu.home'), link: '/'}],
-        snapshot: [{id: 0, text: t('common.menu.home'), link: '/'}]
+        project: [{id: 0, text: homeText, link: '/'}],
+        clazz: [{id: 0, text: homeText, link: '/'}],
+        method: [{id: 0, text: homeText, link: '/'}],
+        snapshot: [{id: 0, text: homeText, link: '/'}]
     };
 
     const listItem = links[title].map((obj, index) => (

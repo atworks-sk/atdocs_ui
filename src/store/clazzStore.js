@@ -83,7 +83,7 @@ export default function bulktest(state = initialState, action) {
         case SEARCH_CLAZZ_LIST_CLEAR:
             return {
                 ...state,
-                searchProjectListRes: reducerUtils.initial()
+                searchClazzListRes: reducerUtils.initial()
             };
         case SEARCH_CLAZZ_LIST_SET_FORM:
             return {

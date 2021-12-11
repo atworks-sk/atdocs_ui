@@ -3,25 +3,25 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {ContentHeader, Button} from '@components';
 import {Container, Row, Col} from 'react-bootstrap';
-import ClazzSearch from '@pages/clazz/components/ClazzSearch';
-import ClazzTable from '@pages/clazz/components/ClazzTable';
+import MethodSearch from '@pages/method/components/MethodSearch';
+import MethodTable from '@pages/method/components/MethodTable';
 
 /*
- * Clazz 조회/등록/수정 화면
+ * Method 조회/등록/수정 화면
  */
-const Clazz = () => {
+const Method = () => {
     return (
         <>
             <Container fluid>
                 <Row>
                     <Col xs="12">
-                        <ContentHeader title="clazz" />
+                        <ContentHeader title="method" />
                     </Col>
                     <Col xs="12">
-                        <ClazzSearch />
+                        <MethodSearch />
                     </Col>
                     <Col xs="12">
-                        <ClazzTable />
+                        <MethodTable />
                     </Col>
                 </Row>
             </Container>
@@ -29,4 +29,4 @@ const Clazz = () => {
     );
 };
 
-export default Clazz;
+export default Method;

@@ -5,28 +5,28 @@ import {Button, Spinner, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
 import {toast} from 'react-toastify';
 import {
-    searchClazzList,
-    searchClazzListSetForm
-} from '../../../store/clazzStore';
+    searchMethodList,
+    searchMethodListSetForm
+} from '../../../store/methodStore';
 import {getErrorMsg} from '../../../lib/commonUiUtils';
 /*
  * Project 검색조건 Contanier
  */
-const ClazzTable = () => {
+const MethodTable = () => {
     const dispatch = useDispatch();
 
     const {data: searchList} = useSelector(
-        (state) => state.clazz.searchClazzListRes
+        (state) => state.method.searchMethodListRes
     );
-    const {searchClazzListForm: searchForm} = useSelector(
-        (state) => state.clazz
+    const {searchMethodListForm: searchForm} = useSelector(
+        (state) => state.method
     );
 
     const movePage = (page) => {
         const searchFormT = {...searchForm};
         searchFormT.page = page;
-        dispatch(searchClazzListSetForm(searchFormT));
-        dispatch(searchClazzList(searchFormT));
+        dispatch(searchMethodListSetForm(searchFormT));
+        dispatch(searchMethodList(searchFormT));
     };
 
     const onClickChange = (row) => {
@@ -44,15 +44,12 @@ const ClazzTable = () => {
             key: 'clazzName'
         },
         {
-            title: '패키지 명',
-            key: 'packageName'
+            title: '접근제한자',
+            key: 'accessSpecifier'
         },
         {
-            title: '메서드 건수',
-            key: 'snapshotCnt',
-            render: (id, row, column) => {
-                return `${row.methodCnt} 건`;
-            }
+            title: '매서드 명',
+            key: 'methodName'
         },
         {
             title: '생성일자',
@@ -68,9 +65,6 @@ const ClazzTable = () => {
                         <Button theme="link" onClick={() => onClickChange(row)}>
                             <FaSearch />
                         </Button>
-                        {/* <Button theme="link" onClick={() => onClickDelete(row)}>
-                            <FaTrash />
-                        </Button> */}
                     </>
                 );
             }
@@ -94,4 +88,4 @@ const ClazzTable = () => {
     );
 };
 
-export default ClazzTable;
+export default MethodTable;
