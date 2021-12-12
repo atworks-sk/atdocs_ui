@@ -10,6 +10,7 @@ const ContentHeader = ({title}) => {
     const links = {
         project: [{id: 0, text: homeText, link: '/'}],
         clazz: [{id: 0, text: homeText, link: '/'}],
+        clazzDetail: [{id: 0, text: homeText, link: '/'}],
         method: [{id: 0, text: homeText, link: '/'}],
         snapshot: [{id: 0, text: homeText, link: '/'}]
     };

@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import DashBoard from '@pages/dashboard/Dashboard';
 import Project from '@pages/project/Project';
 import Clazz from '@pages/clazz/Clazz';
+import ClazzDetail from '@pages/clazz-detail/ClazzDetail';
 import Method from '@pages/method/Method';
 import MenuSidebar from '@modules/main/menu-sidebar/MenuSidebar';
 import Header from './header/Header';
@@ -27,9 +28,6 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(getProjectList());
-        // dispatch(searchServer(''));
-        // dispatch(searchCode());
-        // dispatch(searchMember());
 
         updateAppLoading(true);
         const fetchProfile = async () => {
@@ -64,6 +62,11 @@ const Main = () => {
                             <Route exact path="/" component={DashBoard} />
                             <Route exact path="/project" component={Project} />
                             <Route exact path="/clazz" component={Clazz} />
+                            <Route
+                                exact
+                                path="/clazz-detail"
+                                component={ClazzDetail}
+                            />
                             <Route exact path="/method" component={Method} />
                         </Switch>
                     </section>

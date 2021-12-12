@@ -6,6 +6,7 @@
             "project":"프로젝트",
             "snapshot":"스냅샷",
             "clazz":"클래스",
+            "clazzDetail":"클래스 상세",
             "method":"메서드"
         },
         "menuDesc":{
@@ -13,6 +14,7 @@
             "project":"프로젝트 관리",
             "snapshot":"스냅샷",
             "clazz":"클래스 관리",
+            "clazzDetail":"클래스 상세",
             "method":"메서드 관리"
         }
 

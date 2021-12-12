@@ -24,13 +24,6 @@ const SEARCH_CLAZZ_LIST_ERROR = `${PREFIX}/SEARCH_CLAZZ_LIST_ERROR`; // 요청 �
 const SEARCH_CLAZZ_LIST_CLEAR = `${PREFIX}/SEARCH_CLAZZ_LIST_CLEAR`; // 조회 결과 초기화
 const SEARCH_CLAZZ_LIST_SET_FORM = `${PREFIX}/SEARCH_CLAZZ_LIST_SET_FORM`;
 
-/*
- * 프로젝트 리스트 조회
- * 리스트 조회 : searchProjectList (SEARCH_PROJECT_LIST)
- * 리스트 초기화 : searchProjectListClear (SEARCH_PROJECT_LIST_CLEAR)
- * Form 데이터 설정 : searchProjectListSetForm (SEARCH_PROJECT_LIST_SET_FORM)
- * Form 초기값 조회 : searchProjectListFormInitData
- */
 export const searchClazzList = (searchForm) => ({
     type: SEARCH_CLAZZ_LIST,
     payload: searchForm
@@ -54,19 +47,39 @@ export const searchClazzListFormInitData = () => {
 };
 
 /*
- * projectSaga
+ * 프로젝트 상세조회
+ * 상세 조회 : searchClazzDetail (SEARCH_CLAZZ_LIST)
+ */
+const SEARCH_CLAZZ_DETAIL = `${PREFIX}/SEARCH_CLAZZ_DETAIL`; // 요청 시작
+const SEARCH_CLAZZ_DETAIL_SUCCESS = `${PREFIX}/SEARCH_CLAZZ_DETAIL_SUCCESS`; // 요청 성공
+const SEARCH_CLAZZ_DETAIL_ERROR = `${PREFIX}/SEARCH_CLAZZ_DETAIL_ERROR`; // 요청 실패
+// const SEARCH_CLAZZ_LIST_CLEAR = `${PREFIX}/SEARCH_CLAZZ_LIST_CLEAR`; // 조회 결과 초기화
+export const searchClazzDetail = (id) => ({
+    type: SEARCH_CLAZZ_DETAIL,
+    payload: {
+        id
+    }
+});
+
+/*
+ * projectSaga (API와 연결)
  */
 export function* clazzSaga() {
     yield takeLatest(
         SEARCH_CLAZZ_LIST,
         createPromiseSaga(SEARCH_CLAZZ_LIST, clazzApi.searchClazzList)
     );
+    yield takeLatest(
+        SEARCH_CLAZZ_DETAIL,
+        createPromiseSaga(SEARCH_CLAZZ_DETAIL, clazzApi.searchClazzDetail)
+    );
 }
 
 // initialState 쪽도 반복되는 코드를 initial() 함수를 사용해서 리팩토링 했습니다.
 const initialState = {
     searchClazzListForm: searchClazzListFormInitData(),
-    searchClazzListRes: reducerUtils.initial()
+    searchClazzListRes: reducerUtils.initial(),
+    searchClazzDetailRes: reducerUtils.initial()
 };
 
 export default function bulktest(state = initialState, action) {
@@ -91,6 +104,14 @@ export default function bulktest(state = initialState, action) {
                 searchClazzListForm: action.payload.searchClazzListForm
             };
 
+        case SEARCH_CLAZZ_DETAIL:
+        case SEARCH_CLAZZ_DETAIL_SUCCESS:
+        case SEARCH_CLAZZ_DETAIL_ERROR:
+            return handleAsyncActions(
+                SEARCH_CLAZZ_DETAIL,
+                'searchClazzDetailRes',
+                true
+            )(state, action);
         default:
             return state;
     }

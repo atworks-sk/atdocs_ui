@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
 import {FaSearch, FaTrash} from 'react-icons/fa';
+import {useHistory} from 'react-router-dom';
 import {Button, Spinner, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
 import {toast} from 'react-toastify';
@@ -14,6 +15,7 @@ import {getErrorMsg} from '../../../lib/commonUiUtils';
  */
 const ClazzTable = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const {data: searchList} = useSelector(
         (state) => state.clazz.searchClazzListRes
@@ -32,6 +34,13 @@ const ClazzTable = () => {
     const onClickChange = (row) => {
         const initData = row;
         // dispatch(showModalProjectUpdate(initData));
+
+        history.push({
+            pathname: '/clazz-detail',
+            state: {
+                id: row.id
+            }
+        });
     };
 
     const columns = [

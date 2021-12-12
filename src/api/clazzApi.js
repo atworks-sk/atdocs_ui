@@ -17,3 +17,11 @@ export const searchClazzList = async ({
     );
     return response;
 };
+
+/*
+ * project detail 조회
+ */
+export const searchClazzDetail = async ({id}) => {
+    const response = await axios.get(`/clazz/searchDetail/${id}`);
+    return response;
+};
