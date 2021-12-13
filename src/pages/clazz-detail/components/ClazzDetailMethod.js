@@ -4,6 +4,7 @@ import {FaSearch, FaTrash} from 'react-icons/fa';
 import {Form} from 'react-bootstrap';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
+
 /*
  * Project 검색조건 Contanier
  */
@@ -28,8 +29,6 @@ const ClazzDetailMethod = () => {
             return {data: {content: []}};
         }
         const temp = {data: {content: searchDetail.data.methodList}};
-
-        console.log(temp.data.content.length);
         return temp;
     };
 
