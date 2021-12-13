@@ -204,7 +204,6 @@ const Table = ({
         if (!data) {
             return getEmptyTableBody();
         }
-
         const {empty} = data.data;
         if (empty) {
             return getEmptyTableBody();

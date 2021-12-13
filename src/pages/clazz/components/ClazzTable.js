@@ -48,13 +48,21 @@ const ClazzTable = () => {
             title: '프로젝트 명',
             key: 'projectName'
         },
+
+        {
+            title: '패키지 명',
+            key: 'packageName'
+        },
         {
             title: '클래스 명',
             key: 'clazzName'
         },
         {
-            title: '패키지 명',
-            key: 'packageName'
+            title: '라인수',
+            key: 'line',
+            render: (id, row, column) => {
+                return `${row.line} Line`;
+            }
         },
         {
             title: '메서드 건수',
