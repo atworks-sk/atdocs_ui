@@ -6,6 +6,7 @@ import {ContentHeader, Spinner} from '@components';
 import {Container, Row, Col} from 'react-bootstrap';
 // import ClazzSearch from '@pages/clazz/components/ClazzSearch';
 import ClazzDetailInfo from '@pages/clazz-detail/components/ClazzDetailInfo';
+import ClazzDetailFile from '@pages/clazz-detail/components/ClazzDetailFile';
 import ClazzDetailMethod from '@pages/clazz-detail/components/ClazzDetailMethod';
 
 import {toast} from 'react-toastify';
@@ -50,8 +51,11 @@ const ClazzDetail = () => {
                     <Col xs="12">
                         <ContentHeader title="clazzDetail" />
                     </Col>
-                    <Col xs="12">
+                    <Col xs="8">
                         <ClazzDetailInfo />
+                    </Col>
+                    <Col xs="4">
+                        <ClazzDetailFile />
                     </Col>
                     <Col xs="12">
                         <ClazzDetailMethod />

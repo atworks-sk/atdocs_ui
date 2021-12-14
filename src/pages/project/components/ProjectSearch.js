@@ -79,7 +79,12 @@ const ProjectSearch = () => {
                 title="검색조건"
                 body={
                     <>
-                        <Container fluid onKeyPress={onClickSearch}>
+                        <Container
+                            fluid
+                            onKeyPress={(e) => {
+                                if (e.key === 'Enter') onClickSearch();
+                            }}
+                        >
                             <Row>
                                 <Col xs="3">
                                     <Form.Group>

@@ -58,6 +58,10 @@ const ClazzTable = () => {
             key: 'clazzName'
         },
         {
+            title: '클래스 유형',
+            key: 'clazzTypeName'
+        },
+        {
             title: '라인수',
             key: 'line',
             render: (id, row, column) => {
@@ -72,7 +76,7 @@ const ClazzTable = () => {
             }
         },
         {
-            title: '생성일자',
+            title: '등록일자',
             key: 'createDateTime'
         },
         {

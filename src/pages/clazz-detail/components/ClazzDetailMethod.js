@@ -42,8 +42,8 @@ const ClazzDetailMethod = () => {
             key: 'methodName'
         },
         {
-            title: '매서드 설명',
-            key: 'methodDesc',
+            title: '리턴 타입',
+            key: 'returnType',
             render: (id, row, column) => {
                 return <>주석의 일부를 조회해서 설명으로..</>;
             }
