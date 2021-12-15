@@ -21,7 +21,6 @@ const ClazzDetailData = () => {
     );
 
     const onClickChange = (id) => {
-        console.log(id);
         dispatch(searchClazzDetail(id));
         // dispatch(showModalProjectUpdate(initData));
     };
