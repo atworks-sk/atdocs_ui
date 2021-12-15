@@ -32,9 +32,6 @@ const ClazzTable = () => {
     };
 
     const onClickChange = (row) => {
-        const initData = row;
-        // dispatch(showModalProjectUpdate(initData));
-
         history.push({
             pathname: '/clazz-detail',
             state: {

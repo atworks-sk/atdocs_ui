@@ -100,7 +100,7 @@ const ClazzDetailInfo = () => {
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>라인수</Form.Label>
                             </Col>
-                            <Col xs="2">
+                            <Col xs="4">
                                 <Form.Control
                                     type="text"
                                     disabled

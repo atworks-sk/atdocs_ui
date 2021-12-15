@@ -8,6 +8,8 @@ import {Container, Row, Col} from 'react-bootstrap';
 import ClazzDetailInfo from '@pages/clazz-detail/components/ClazzDetailInfo';
 import ClazzDetailFile from '@pages/clazz-detail/components/ClazzDetailFile';
 import ClazzDetailMethod from '@pages/clazz-detail/components/ClazzDetailMethod';
+import ClazzDetailData from '@pages/clazz-detail/components/ClazzDetailData';
+import ClazzDetailImport from '@pages/clazz-detail/components/ClazzDetailImport';
 
 import {toast} from 'react-toastify';
 import {getErrorMsg} from '../../lib/commonUiUtils';
@@ -21,9 +23,11 @@ const ClazzDetail = () => {
     const history = useHistory();
     const location = useLocation();
 
-    const {loading: searchLoading, error: searchError} = useSelector(
-        (state) => state.clazz.searchClazzDetailRes
-    );
+    const {
+        loading: searchLoading,
+        data: searchDetail,
+        error: searchError
+    } = useSelector((state) => state.clazz.searchClazzDetailRes);
 
     useEffect(() => {
         if (location.state != null) {
@@ -59,6 +63,24 @@ const ClazzDetail = () => {
                     </Col>
                     <Col xs="12">
                         <ClazzDetailMethod />
+                    </Col>
+                    <Col xs="12">
+                        <ClazzDetailData />
+                    </Col>
+
+                    <Col xs="6">
+                        <ClazzDetailImport
+                            cardName="내가 참조하는 클래스"
+                            data={searchDetail && searchDetail.data.importClass}
+                        />
+                    </Col>
+                    <Col xs="6">
+                        <ClazzDetailImport
+                            cardName="나를 참조하는 클래스"
+                            data={
+                                searchDetail && searchDetail.data.importedClass
+                            }
+                        />
                     </Col>
                 </Row>
             </Container>

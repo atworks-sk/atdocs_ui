@@ -99,6 +99,7 @@ const ClazzDetailMethod = () => {
                 // movePage={movePage}
                 rowKey="id"
                 columns={columns}
+                disablePageView
                 data={renderTableData()}
             />
         </>
