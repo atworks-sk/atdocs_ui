@@ -15,12 +15,6 @@ const ClazzDetailImport = ({cardName, data}) => {
 
     const onClickChange = (row) => {
         dispatch(searchClazzDetail(row.id));
-        // history.push({
-        //     pathname: '/clazz-detail',
-        //     state: {
-        //         id: row.id
-        //     }
-        // });
     };
 
     const renderTableData = () => {

@@ -4,6 +4,7 @@ import {useHistory, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
 import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
+
 /*
  * Clazz 조회/등록/수정 화면
  */
@@ -47,7 +48,6 @@ const ClazzDetailInfo = () => {
                                     }
                                 />
                             </Col>
-                            {/* <Col xs="1" /> */}
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>패키지 명</Form.Label>
                             </Col>
@@ -62,14 +62,14 @@ const ClazzDetailInfo = () => {
                                 />
                             </Col>
                         </Row>
-
+                        {/*
                         <Row style={{paddingBottom: '10px'}}>
-                            {/* <Col xs="4" />
+                            <Col xs="4" />
                             <Col xs="1" style={{textAlign: 'center'}}>
                                 <Form.Label>버전</Form.Label>
                             </Col>
-                            <Col xs="2" /> */}
-                        </Row>
+                            <Col xs="2" /> 
+                        </Row> */}
 
                         <Row style={{paddingBottom: '10px'}}>
                             <Col xs="2" style={{textAlign: 'center'}}>
@@ -97,7 +97,7 @@ const ClazzDetailInfo = () => {
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>라인수</Form.Label>
                             </Col>
-                            <Col xs="4">
+                            <Col xs="2">
                                 <Form.Control
                                     type="text"
                                     disabled

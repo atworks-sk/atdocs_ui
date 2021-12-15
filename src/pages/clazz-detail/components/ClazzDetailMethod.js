@@ -53,10 +53,7 @@ const ClazzDetailMethod = () => {
         },
         {
             title: '리턴 타입',
-            key: 'returnType',
-            render: (id, row, column) => {
-                return <>주석의 일부를 조회해서 설명으로..</>;
-            }
+            key: 'returnText'
         },
         {
             title: '파라메터',

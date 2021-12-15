@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
+import {useHistory, useLocation} from 'react-router-dom';
 import {FaSearch, FaTrash} from 'react-icons/fa';
 import {Button, Spinner, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
@@ -14,6 +15,7 @@ import {getErrorMsg} from '../../../lib/commonUiUtils';
  */
 const MethodTable = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const {data: searchList} = useSelector(
         (state) => state.method.searchMethodListRes
@@ -30,7 +32,12 @@ const MethodTable = () => {
     };
 
     const onClickChange = (row) => {
-        const initData = row;
+        history.push({
+            pathname: '/method-detail',
+            state: {
+                id: row.id
+            }
+        });
     };
 
     const columns = [

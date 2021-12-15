@@ -49,7 +49,7 @@ const MenuSidebar = () => {
                         <li key="method" className="nav-item">
                             <NavLink to="/method" exact className="nav-link">
                                 <i className="nav-icon fas fa-database" />
-                                <p>메소드</p>
+                                <p>매서드</p>
                             </NavLink>
                         </li>
                         <li key="api" className="nav-item">

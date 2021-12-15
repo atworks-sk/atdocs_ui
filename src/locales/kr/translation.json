@@ -7,7 +7,8 @@
             "snapshot":"스냅샷",
             "clazz":"클래스",
             "clazzDetail":"클래스 상세",
-            "method":"메서드"
+            "method":"메서드",
+            "methodDetail":"메서드 상세"
         },
         "menuDesc":{
             "home":"Home",
@@ -15,7 +16,8 @@
             "snapshot":"스냅샷",
             "clazz":"클래스 관리",
             "clazzDetail":"클래스 상세",
-            "method":"메서드 관리"
+            "method":"메서드 관리",
+            "methodDetail":"메서드 상세"
         }
 
     }

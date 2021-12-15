@@ -6,6 +6,7 @@ import Project from '@pages/project/Project';
 import Clazz from '@pages/clazz/Clazz';
 import ClazzDetail from '@pages/clazz-detail/ClazzDetail';
 import Method from '@pages/method/Method';
+import MethodDetail from '@pages/method-detail/MethodDetail';
 import MenuSidebar from '@modules/main/menu-sidebar/MenuSidebar';
 import Header from './header/Header';
 import Footer from './footer/Footer';
@@ -68,6 +69,11 @@ const Main = () => {
                                 component={ClazzDetail}
                             />
                             <Route exact path="/method" component={Method} />
+                            <Route
+                                exact
+                                path="/method-detail"
+                                component={MethodDetail}
+                            />
                         </Switch>
                     </section>
                 </div>

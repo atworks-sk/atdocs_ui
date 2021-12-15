@@ -10,8 +10,15 @@ const ContentHeader = ({title}) => {
     const links = {
         project: [{id: 0, text: homeText, link: '/'}],
         clazz: [{id: 0, text: homeText, link: '/'}],
-        clazzDetail: [{id: 0, text: homeText, link: '/'}],
+        clazzDetail: [
+            {id: 0, text: homeText, link: '/'},
+            {id: 0, text: t('common.menuDesc.clazz'), link: '/clazz'}
+        ],
         method: [{id: 0, text: homeText, link: '/'}],
+        methodDetail: [
+            {id: 0, text: homeText, link: '/'},
+            {id: 0, text: t('common.menuDesc.method'), link: '/method'}
+        ],
         snapshot: [{id: 0, text: homeText, link: '/'}]
     };
 
