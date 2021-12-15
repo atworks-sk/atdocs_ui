@@ -12,10 +12,6 @@ import {searchClazzDetail} from '../../../store/clazzStore';
 const ClazzDetailData = () => {
     const dispatch = useDispatch();
 
-    // const {data: searchDetail} = useSelector(
-    //     (state) => state.clazz.searchClazzDetailRes
-    // );
-
     const {data: searchDetail} = useSelector(
         (state) => state.clazz.searchClazzDetailRes
     );
@@ -35,10 +31,6 @@ const ClazzDetailData = () => {
 
     const renderElementText = (row) => {
         const renderTemp = (obj, size) => {
-            // eslint-disable-next-line no-debugger
-            debugger;
-            // elementClazzId: 0, elementName: 'ArrayList', elementDepth: 0
-
             let prefix = '';
             let afterFix = '';
 
