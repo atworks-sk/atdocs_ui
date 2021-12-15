@@ -4,9 +4,6 @@ import {useHistory, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
 import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
-// import ClazzSearch from '@pages/clazz/components/ClazzSearch';
-// import ClazzTable from '@pages/clazz/components/ClazzTable';
-// import {searchClazzDetail} from '../../store/clazzStore';
 /*
  * Clazz 조회/등록/수정 화면
  */

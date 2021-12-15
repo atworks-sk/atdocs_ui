@@ -12,11 +12,7 @@ import {
     saveProjectClear,
     searchProjectList
 } from '../../../store/projectStore';
-import {
-    printFormError,
-    getInputValidMsg,
-    getErrorMsg
-} from '../../../lib/commonUiUtils';
+import {getErrorMsg} from '../../../lib/commonUiUtils';
 /*
  * Project 검색조건 Contanier
  */

@@ -18,7 +18,6 @@ const ClazzDetailData = () => {
 
     const onClickChange = (id) => {
         dispatch(searchClazzDetail(id));
-        // dispatch(showModalProjectUpdate(initData));
     };
 
     const renderTableData = () => {

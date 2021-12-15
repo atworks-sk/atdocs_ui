@@ -31,7 +31,6 @@ const MethodTable = () => {
 
     const onClickChange = (row) => {
         const initData = row;
-        // dispatch(showModalProjectUpdate(initData));
     };
 
     const columns = [

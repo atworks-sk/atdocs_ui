@@ -36,9 +36,33 @@ export function* commonSaga() {
     );
 }
 
+/*
+ * (공통영역) Java source show popup
+ * SHOW : showModalProjectUpdate (SHOW_MODAL_JAVA_SOURCE)
+ * HIDE : hideModalProjectUpdate (HIDE_MODAL_JAVA_SOURCE)
+ */
+const SHOW_MODAL_JAVA_SOURCE = `${PREFIX}/SHOW_MODAL_JAVA_SOURCE`; // 프로젝트 등록/수정 팝업 호출
+const HIDE_MODAL_JAVA_SOURCE = `${PREFIX}/HIDE_MODAL_JAVA_SOURCE`; // 프로젝트 등록/수정 팝업 호출
+
+export const showModalJavaSource = (initData) => ({
+    type: SHOW_MODAL_JAVA_SOURCE,
+    payload: {
+        ...initData
+    }
+});
+
+export const hideModalJavaSource = () => ({
+    type: HIDE_MODAL_JAVA_SOURCE
+});
+
 // initialState 쪽도 반복되는 코드를 initial() 함수를 사용해서 리팩토링 했습니다.
 const initialState = {
-    projectList: reducerUtils.initial()
+    projectList: reducerUtils.initial(),
+    // 자바소스 보기
+    javaSourceModalInitData: {
+        showModal: false,
+        initData: {}
+    }
 };
 
 export default function bulktest(state = initialState, action) {
@@ -52,7 +76,23 @@ export default function bulktest(state = initialState, action) {
                 'projectList',
                 true
             )(state, action);
-
+        // 자바소스 팝업 호출
+        case SHOW_MODAL_JAVA_SOURCE:
+            return {
+                ...state,
+                javaSourceModalInitData: {
+                    showModal: true,
+                    initData: {...action.payload}
+                }
+            };
+        case HIDE_MODAL_JAVA_SOURCE:
+            return {
+                ...state,
+                javaSourceModalInitData: {
+                    showModal: false,
+                    initData: {}
+                }
+            };
         default:
             return state;
     }

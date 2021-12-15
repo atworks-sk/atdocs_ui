@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
-import {FaSearch, FaTrash} from 'react-icons/fa';
-import {Form} from 'react-bootstrap';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
+import JavaSource from '@pages/common/popup/JavaSource';
+import {showModalJavaSource} from '../../../store/commonStore';
 
 /*
  * Project 검색조건 Contanier
@@ -19,9 +19,19 @@ const ClazzDetailMethod = () => {
         (state) => state.clazz.searchClazzDetailRes
     );
 
-    const onClickChange = (row) => {
-        const initData = row;
-        // dispatch(showModalProjectUpdate(initData));
+    /*
+     * show java source modal
+     */
+    const onClickLine = (row) => {
+        const initData = {
+            methodName: row.methodName,
+            fullContents: row.fullContents
+        };
+        dispatch(showModalJavaSource(initData));
+    };
+
+    const onClickMove = (row) => {
+        console.log(row);
     };
 
     const renderTableData = () => {
@@ -61,7 +71,7 @@ const ClazzDetailMethod = () => {
             render: (id, row, column) => {
                 return (
                     <>
-                        <Button theme="link" onClick={() => onClickChange(row)}>
+                        <Button theme="link" onClick={() => onClickLine(row)}>
                             {row.line} Line
                         </Button>
                     </>
@@ -91,10 +101,11 @@ const ClazzDetailMethod = () => {
     return (
         <>
             {/* <Spinner isLoading={deleteLoading} /> */}
+            <JavaSource />
             <Table
                 tableName="메서드 리스트"
                 onDoubleClick={(id, row) => {
-                    onClickChange(row);
+                    onClickMove(row);
                 }}
                 // movePage={movePage}
                 rowKey="id"
