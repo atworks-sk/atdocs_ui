@@ -48,17 +48,22 @@ export const searchClazzListFormInitData = () => {
 
 /*
  * 프로젝트 상세조회
- * 상세 조회 : searchClazzDetail (SEARCH_CLAZZ_LIST)
+ * 상세 조회 : searchClazzDetail (SEARCH_CLAZZ_DETAIL)
+ * 상세 조회 초기화 : searchClazzDetailClear (SEARCH_CLAZZ_DETAIL_CLEAR)
  */
 const SEARCH_CLAZZ_DETAIL = `${PREFIX}/SEARCH_CLAZZ_DETAIL`; // 요청 시작
 const SEARCH_CLAZZ_DETAIL_SUCCESS = `${PREFIX}/SEARCH_CLAZZ_DETAIL_SUCCESS`; // 요청 성공
 const SEARCH_CLAZZ_DETAIL_ERROR = `${PREFIX}/SEARCH_CLAZZ_DETAIL_ERROR`; // 요청 실패
-// const SEARCH_CLAZZ_LIST_CLEAR = `${PREFIX}/SEARCH_CLAZZ_LIST_CLEAR`; // 조회 결과 초기화
+const SEARCH_CLAZZ_DETAIL_CLEAR = `${PREFIX}/SEARCH_CLAZZ_DETAIL_CLEAR`; // 조회 결과 초기화
 export const searchClazzDetail = (id) => ({
     type: SEARCH_CLAZZ_DETAIL,
     payload: {
         id
     }
+});
+
+export const searchClazzDetailClear = () => ({
+    type: SEARCH_CLAZZ_DETAIL_CLEAR
 });
 
 /*
@@ -112,6 +117,12 @@ export default function bulktest(state = initialState, action) {
                 'searchClazzDetailRes',
                 true
             )(state, action);
+
+        case SEARCH_CLAZZ_DETAIL_CLEAR:
+            return {
+                ...state,
+                searchClazzDetailRes: reducerUtils.initial()
+            };
         default:
             return state;
     }

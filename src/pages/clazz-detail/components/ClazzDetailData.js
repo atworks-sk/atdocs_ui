@@ -146,7 +146,7 @@ const ClazzDetailData = () => {
         <>
             {/* <Spinner isLoading={deleteLoading} /> */}
             <Table
-                tableName="필드 리스트"
+                tableName="데이터 리스트"
                 onDoubleClick={(id, row) => {
                     onClickChange(row);
                 }}

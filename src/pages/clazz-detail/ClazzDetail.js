@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {ContentHeader, Spinner} from '@components';
-import {Container, Row, Col} from 'react-bootstrap';
-// import ClazzSearch from '@pages/clazz/components/ClazzSearch';
+import {Container, Row, Col, Tab, Tabs} from 'react-bootstrap';
+
 import ClazzDetailInfo from '@pages/clazz-detail/components/ClazzDetailInfo';
 import ClazzDetailFile from '@pages/clazz-detail/components/ClazzDetailFile';
 import ClazzDetailMethod from '@pages/clazz-detail/components/ClazzDetailMethod';
@@ -13,7 +13,10 @@ import ClazzDetailImport from '@pages/clazz-detail/components/ClazzDetailImport'
 
 import {toast} from 'react-toastify';
 import {getErrorMsg} from '../../lib/commonUiUtils';
-import {searchClazzDetail} from '../../store/clazzStore';
+import {
+    searchClazzDetail,
+    searchClazzDetailClear
+} from '../../store/clazzStore';
 
 /*
  * Clazz 조회/등록/수정 화면
@@ -29,8 +32,11 @@ const ClazzDetail = () => {
         error: searchError
     } = useSelector((state) => state.clazz.searchClazzDetailRes);
 
+    const [tabKey, setTabKey] = useState('T1');
+
     useEffect(() => {
         if (location.state != null) {
+            dispatch(searchClazzDetailClear());
             dispatch(searchClazzDetail(location.state.id));
         } else {
             // alert('TEST');
@@ -43,9 +49,20 @@ const ClazzDetail = () => {
     useEffect(() => {
         if (!searchLoading && searchError) {
             toast.error(getErrorMsg(searchError, 'search'));
+            dispatch(searchClazzDetailClear());
+        }
+
+        if (!searchLoading && searchDetail) {
+            // searchDetail.
+            if (searchDetail.data.clazzTypeName === 'Data') {
+                setTabKey('T2');
+            } else {
+                setTabKey('T1');
+            }
+            // toast.error(getErrorMsg(searchError, 'search'));
             // dispatch(searchClazzListClear());
         }
-    }, [searchError]);
+    }, [searchDetail, searchError]);
 
     return (
         <>
@@ -61,11 +78,21 @@ const ClazzDetail = () => {
                     <Col xs="4">
                         <ClazzDetailFile />
                     </Col>
+
                     <Col xs="12">
-                        <ClazzDetailMethod />
-                    </Col>
-                    <Col xs="12">
-                        <ClazzDetailData />
+                        <Tabs
+                            activeKey={tabKey}
+                            onSelect={(k) => setTabKey(k)}
+                            transition={false}
+                            id="noanim-tab-example"
+                        >
+                            <Tab eventKey="T1" title="메서드">
+                                <ClazzDetailMethod />
+                            </Tab>
+                            <Tab eventKey="T2" title="데이터">
+                                <ClazzDetailData />
+                            </Tab>
+                        </Tabs>
                     </Col>
 
                     <Col xs="6">
