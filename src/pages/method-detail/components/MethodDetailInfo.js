@@ -21,11 +21,11 @@ const MethodDetailInfo = () => {
     /*
      * 현재 매서드에 상위 클래스로 이동
      */
-    const onClickClazz = () => {
+    const onClickMoveClazz = (id) => {
         history.push({
             pathname: '/clazz-detail',
             state: {
-                id: searchDetail.data.clazzId
+                id
             }
         });
     };
@@ -50,7 +50,9 @@ const MethodDetailInfo = () => {
                     <>
                         <span>{prefix}</span>
                         <Form.Label
-                            // onClick={(e) => onClickChange(obj.elementClazzId)}
+                            onClick={(e) =>
+                                onClickMoveClazz(obj.elementClazzId)
+                            }
                             style={{color: 'BLUE'}}
                         >
                             {`${obj.elementName}`}
@@ -66,7 +68,7 @@ const MethodDetailInfo = () => {
                         <Form.Label>{`${obj.elementName}`}</Form.Label>
                         <span>{afterFix}</span>
                         &nbsp; &nbsp;
-                        <Form.Label>{`${row.filedName},`}</Form.Label>
+                        <Form.Label>{`${row.filedName}`}</Form.Label>
                     </>
                 );
             }
@@ -107,7 +109,9 @@ const MethodDetailInfo = () => {
                     <>
                         <span>{prefix}</span>
                         <Form.Label
-                            // onClick={(e) => onClickChange(obj.elementClazzId)}
+                            onClick={(e) =>
+                                onClickMoveClazz(obj.elementClazzId)
+                            }
                             style={{color: 'BLUE'}}
                         >
                             {`${obj.elementName}`}
@@ -203,13 +207,26 @@ const MethodDetailInfo = () => {
                                         (obj, idx) => (
                                             <>
                                                 {renderParamData(obj)}
-                                                &nbsp;&nbsp;&nbsp;
+                                                <br />
                                             </>
                                         )
                                     )}
                                 {/* 
                                 <br />
                                 <Form.Label>파라매터</Form.Label> */}
+                            </Col>
+                            <Col xs="2" style={{textAlign: 'center'}}>
+                                <Form.Label>생성일자</Form.Label>
+                            </Col>
+                            <Col xs="3">
+                                <Form.Control
+                                    type="text"
+                                    disabled
+                                    value={
+                                        searchDetail &&
+                                        searchDetail.data.createDateTime
+                                    }
+                                />
                             </Col>
                         </Row>
                     </>

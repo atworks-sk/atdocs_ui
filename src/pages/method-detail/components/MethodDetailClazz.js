@@ -100,6 +100,7 @@ const MethodDetailClazz = () => {
                                 </InputGroup>
                             </Col>
                         </Row>
+
                         {/* 
                         <Row>
                             <Col xs="2" style={{textAlign: 'center'}}>

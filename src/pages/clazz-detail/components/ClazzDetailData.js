@@ -47,7 +47,9 @@ const ClazzDetailData = () => {
                         <Form.Label
                             onClick={(e) => onClickChange(obj.elementClazzId)}
                             style={{color: 'BLUE'}}
-                        >{`${obj.elementName}`}</Form.Label>
+                        >
+                            {`${obj.elementName}`}
+                        </Form.Label>
                         <span>{afterFix}</span>
                     </>
                 );

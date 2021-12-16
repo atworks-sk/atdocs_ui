@@ -23,6 +23,10 @@ const MethodDetail = () => {
     const history = useHistory();
     const location = useLocation();
 
+    const {loading: searchLoading} = useSelector(
+        (state) => state.method.searchMethodDetailRes
+    );
+
     useEffect(() => {
         if (location.state != null) {
             dispatch(searchMethodDetailClear());
@@ -34,7 +38,7 @@ const MethodDetail = () => {
 
     return (
         <>
-            {/* <Spinner isLoading={searchLoading} /> */}
+            <Spinner isLoading={searchLoading} />
             <Container fluid>
                 <Row>
                     <Col xs="12">

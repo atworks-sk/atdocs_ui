@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
-import {useHistory, useLocation} from 'react-router-dom';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
-import JavaSource from '@pages/common/popup/JavaSource';
 import {FaSearch} from 'react-icons/fa';
+import JavaSource from '@pages/common/popup/JavaSource';
+
+import {useHistory} from 'react-router-dom';
 import {showModalJavaSource} from '../../../store/commonStore';
 
 /*
@@ -13,10 +14,6 @@ import {showModalJavaSource} from '../../../store/commonStore';
 const ClazzDetailMethod = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-
-    // const {data: searchDetail} = useSelector(
-    //     (state) => state.clazz.searchClazzDetailRes
-    // );
 
     const {data: searchDetail} = useSelector(
         (state) => state.clazz.searchClazzDetailRes
@@ -33,7 +30,10 @@ const ClazzDetailMethod = () => {
         dispatch(showModalJavaSource(initData));
     };
 
-    const onClickMove = (row) => {
+    /*
+     * show java source modal
+     */
+    const onClickMethod = (row) => {
         history.push({
             pathname: '/method-detail',
             state: {
@@ -90,7 +90,7 @@ const ClazzDetailMethod = () => {
             render: (id, row, column) => {
                 return (
                     <>
-                        <Button theme="link" onClick={() => onClickMove(row)}>
+                        <Button theme="link" onClick={() => onClickMethod(row)}>
                             <FaSearch />
                         </Button>
                     </>
@@ -106,7 +106,7 @@ const ClazzDetailMethod = () => {
             <Table
                 tableName="메서드 리스트"
                 onDoubleClick={(id, row) => {
-                    onClickMove(row);
+                    onClickMethod(row);
                 }}
                 // movePage={movePage}
                 rowKey="id"
