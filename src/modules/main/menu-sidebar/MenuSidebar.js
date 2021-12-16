@@ -35,7 +35,7 @@ const MenuSidebar = () => {
                             </NavLink>
                         </li>
                         <li key="snapshot" className="nav-item">
-                            <NavLink to="/server" exact className="nav-link">
+                            <NavLink to="/snapshot" exact className="nav-link">
                                 <i className="nav-icon fas fa-camera" />
                                 <p>스냅샷</p>
                             </NavLink>
