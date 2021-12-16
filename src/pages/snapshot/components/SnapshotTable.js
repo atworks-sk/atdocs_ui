@@ -64,9 +64,17 @@ const SnapshotTable = () => {
             title: '매서드 수',
             key: 'methodCnt',
             render: (id, row, column) => {
-                return <>{row.clazzCnt} 건</>;
+                return <>{row.methodCnt} 건</>;
             }
         },
+        {
+            title: '오류 건수',
+            key: 'methodCnt',
+            render: (id, row, column) => {
+                return <>{row.errorCnt} 건</>;
+            }
+        },
+
         //
         {
             title: '등록일자',
