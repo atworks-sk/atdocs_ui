@@ -30,8 +30,114 @@ const MethodDetailInfo = () => {
         });
     };
 
+    const renderParamData = (row) => {
+        if (!searchDetail) return '';
+
+        const {methodParamElementList} = row;
+
+        const renderTemp = (obj, size, filedName) => {
+            let prefix = '';
+            let afterFix = '';
+
+            if (obj.elementDepth !== 0 && size !== 1) {
+                prefix = '<';
+            }
+            if (obj.elementDepth === size - 1 && size !== 1) {
+                afterFix = '>';
+            }
+            if (obj.elementClazzId !== 0) {
+                return (
+                    <>
+                        <span>{prefix}</span>
+                        <Form.Label
+                            // onClick={(e) => onClickChange(obj.elementClazzId)}
+                            style={{color: 'BLUE'}}
+                        >
+                            {`${obj.elementName}`}
+                        </Form.Label>
+                        <span>{afterFix}</span>
+                    </>
+                );
+            }
+            if (obj.elementClazzId === size - 1) {
+                return (
+                    <>
+                        <span>{prefix}</span>
+                        <Form.Label>{`${obj.elementName}`}</Form.Label>
+                        <span>{afterFix}</span>
+                        &nbsp; &nbsp;
+                        <Form.Label>{`${row.filedName},`}</Form.Label>
+                    </>
+                );
+            }
+            return (
+                <>
+                    <span>{prefix}</span>
+                    <Form.Label>{`${obj.elementName}`}</Form.Label>
+                    <span>{afterFix}</span>
+                </>
+            );
+        };
+
+        return (
+            <>
+                {searchDetail &&
+                    methodParamElementList.map((obj) =>
+                        renderTemp(obj, methodParamElementList.length)
+                    )}
+            </>
+        );
+    };
+
     const renderReturnData = () => {
-        return <span>TEST</span>;
+        if (!searchDetail) return '';
+
+        const renderTemp = (obj, size) => {
+            let prefix = '';
+            let afterFix = '';
+
+            if (obj.elementDepth !== 0 && size !== 1) {
+                prefix = '<';
+            }
+            if (obj.elementDepth === size - 1 && size !== 1) {
+                afterFix = '>';
+            }
+            if (obj.elementClazzId !== 0) {
+                return (
+                    <>
+                        <span>{prefix}</span>
+                        <Form.Label
+                            // onClick={(e) => onClickChange(obj.elementClazzId)}
+                            style={{color: 'BLUE'}}
+                        >
+                            {`${obj.elementName}`}
+                        </Form.Label>
+                        <span>{afterFix}</span>
+                    </>
+                );
+            }
+
+            return (
+                <>
+                    <span>{prefix}</span>
+                    <Form.Label>{`${obj.elementName}`}</Form.Label>
+                    <span>{afterFix}</span>
+                </>
+            );
+        };
+
+        return (
+            <>
+                {searchDetail &&
+                    searchDetail.data.methodReturnList.map((obj) =>
+                        renderTemp(
+                            obj,
+                            searchDetail.data.methodReturnList.length
+                        )
+                    )}
+            </>
+        );
+        // return <span>TEST</span>;
     };
 
     return (
@@ -72,9 +178,7 @@ const MethodDetailInfo = () => {
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>리턴데이터</Form.Label>
                             </Col>
-                            <Col xs="5">
-                                <Form.Label>{renderReturnData()}</Form.Label>
-                            </Col>
+                            <Col xs="5">{renderReturnData()}</Col>
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>라인수</Form.Label>
                             </Col>
@@ -89,17 +193,25 @@ const MethodDetailInfo = () => {
                                 />
                             </Col>
                         </Row>
-                        {/* 
-                        <Row>
+                        <Row style={{paddingBottom: '10px'}}>
                             <Col xs="2" style={{textAlign: 'center'}}>
-                                <Form.Label>어노테이션</Form.Label>
+                                <Form.Label>파라매터</Form.Label>
                             </Col>
-                            <Col xs="10">
-                                <Form.Label style={{color: 'BLUE'}}>
-                                    {renderAnnotation()}
-                                </Form.Label>
+                            <Col xs="5">
+                                {searchDetail &&
+                                    searchDetail.data.methodParamList.map(
+                                        (obj, idx) => (
+                                            <>
+                                                {renderParamData(obj)}
+                                                &nbsp;&nbsp;&nbsp;
+                                            </>
+                                        )
+                                    )}
+                                {/* 
+                                <br />
+                                <Form.Label>파라매터</Form.Label> */}
                             </Col>
-                        </Row> */}
+                        </Row>
                     </>
                 }
             />
