@@ -3,8 +3,8 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {ContentHeader, Button} from '@components';
 import {Container, Row, Col} from 'react-bootstrap';
-// import MethodSearch from '@pages/method/components/MethodSearch';
-// import MethodTable from '@pages/method/components/MethodTable';
+import SnapshotSearch from '@pages/snapshot/components/SnapshotSearch';
+import SnapshotTable from '@pages/snapshot/components/SnapshotTable';
 
 /*
  * Method 조회/등록/수정 화면
@@ -17,12 +17,12 @@ const Snapshot = () => {
                     <Col xs="12">
                         <ContentHeader title="snapshot" />
                     </Col>
-                    {/* <Col xs="12">
-                        <MethodSearch />
+                    <Col xs="12">
+                        <SnapshotSearch />
                     </Col>
                     <Col xs="12">
-                        <MethodTable />
-                    </Col> */}
+                        <SnapshotTable />
+                    </Col>
                 </Row>
             </Container>
         </>
