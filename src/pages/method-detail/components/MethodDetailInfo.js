@@ -4,8 +4,10 @@ import {useHistory, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
 import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
-
 import {FaSearch} from 'react-icons/fa';
+import JavaSource from '@pages/common/popup/JavaSource';
+import {showModalJavaSource} from '../../../store/commonStore';
+
 /*
  * Clazz 조회/등록/수정 화면
  */
@@ -28,6 +30,17 @@ const MethodDetailInfo = () => {
                 id
             }
         });
+    };
+
+    /*
+     * 소스 보여주기
+     */
+    const onClickShowSource = () => {
+        const initData = {
+            methodName: searchDetail.data.methodName,
+            fullContents: searchDetail.data.fullContents
+        };
+        dispatch(showModalJavaSource(initData));
     };
 
     const renderParamData = (row) => {
@@ -168,6 +181,7 @@ const MethodDetailInfo = () => {
 
     return (
         <>
+            <JavaSource />
             <Card
                 title="매서드 정보"
                 body={
@@ -209,14 +223,22 @@ const MethodDetailInfo = () => {
                                 <Form.Label>라인수</Form.Label>
                             </Col>
                             <Col xs="3">
-                                <Form.Control
-                                    type="text"
-                                    disabled
-                                    value={
-                                        searchDetail &&
-                                        `${searchDetail.data.line} line`
-                                    }
-                                />
+                                <InputGroup className="mb-2">
+                                    <Form.Control
+                                        type="text"
+                                        disabled
+                                        value={
+                                            searchDetail &&
+                                            `${searchDetail.data.line} line`
+                                        }
+                                    />
+                                    <Button
+                                        theme="link"
+                                        onClick={(e) => onClickShowSource()}
+                                    >
+                                        <FaSearch />
+                                    </Button>
+                                </InputGroup>
                             </Col>
                         </Row>
                         <Row style={{paddingBottom: '10px'}}>

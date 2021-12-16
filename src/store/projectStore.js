@@ -44,8 +44,8 @@ const SAVE_PROJECT_CLEAR = `${PREFIX}/SAVE_PROJECT_CLEAR`; // 조회 결과 초�
 
 /*
  * 프로젝트 삭제 프로세스
- * 프로젝트 삭제  : deleteProject (SAVE_PROJECT)
- * 프로젝트 삭제 초기화 : deleteProjectClear (SAVE_PROJECT_CLEAR)
+ * 프로젝트 삭제  : deleteProject (DELETE_PROJECT)
+ * 프로젝트 삭제 초기화 : deleteProjectClear (DELETE_PROJECT_CLEAR)
  */
 const DELETE_PROJECT = `${PREFIX}/DELETE_PROJECT`; // 요청 시작
 const DELETE_PROJECT_SUCCESS = `${PREFIX}/DELETE_PROJECT_SUCCESS`; // 요청 성공
@@ -137,7 +137,7 @@ export function* projectSaga() {
     );
     yield takeEvery(
         SAVE_PROJECT,
-        createPromiseSaga(DELETE_PROJECT, projectApi.saveProject)
+        createPromiseSaga(SAVE_PROJECT, projectApi.saveProject)
     );
     yield takeEvery(
         DELETE_PROJECT,
