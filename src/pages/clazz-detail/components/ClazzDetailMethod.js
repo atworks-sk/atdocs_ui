@@ -34,8 +34,6 @@ const ClazzDetailMethod = () => {
     };
 
     const onClickMove = (row) => {
-        console.log(row);
-
         history.push({
             pathname: '/method-detail',
             state: {

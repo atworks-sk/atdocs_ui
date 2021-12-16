@@ -18,17 +18,6 @@ const MethodDetailInfo = () => {
         (state) => state.method.searchMethodDetailRes
     );
 
-    const renderAnnotation = () => {
-        let text = '';
-        if (searchDetail) {
-            searchDetail.data.clazzAnnotationList.forEach((obj) => {
-                text += `${obj.expression} `;
-            });
-        }
-
-        return text;
-    };
-
     /*
      * 현재 매서드에 상위 클래스로 이동
      */
@@ -41,6 +30,10 @@ const MethodDetailInfo = () => {
         });
     };
 
+    const renderReturnData = () => {
+        return 'test';
+    };
+
     return (
         <>
             <Card
@@ -48,7 +41,7 @@ const MethodDetailInfo = () => {
                 body={
                     <>
                         <Row style={{paddingBottom: '10px'}}>
-                            <Col xs="1" style={{textAlign: 'center'}}>
+                            <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>매서드 명</Form.Label>
                             </Col>
                             <Col xs="4">
@@ -61,7 +54,26 @@ const MethodDetailInfo = () => {
                                     }
                                 />
                             </Col>
-                            <Col xs="1" style={{textAlign: 'center'}}>
+                            <Col xs="2" style={{textAlign: 'center'}}>
+                                <Form.Label>접근제한자</Form.Label>
+                            </Col>
+                            <Col xs="2">
+                                <Form.Control
+                                    type="text"
+                                    disabled
+                                    value={
+                                        searchDetail &&
+                                        searchDetail.data.accessSpecifier
+                                    }
+                                />
+                            </Col>
+                        </Row>
+                        <Row style={{paddingBottom: '10px'}}>
+                            <Col xs="2" style={{textAlign: 'center'}}>
+                                <Form.Label>리턴데이터</Form.Label>
+                            </Col>
+                            <Col xs="4">{renderReturnData()}</Col>
+                            <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>라인수</Form.Label>
                             </Col>
                             <Col xs="2">
