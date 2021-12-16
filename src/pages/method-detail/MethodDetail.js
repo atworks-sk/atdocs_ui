@@ -6,8 +6,15 @@ import {ContentHeader, Spinner} from '@components';
 import {Container, Row, Col, Tab, Tabs} from 'react-bootstrap';
 
 import {toast} from 'react-toastify';
-import {getErrorMsg} from '../../lib/commonUiUtils';
+// import {MethodDetailInfo} from '@pages/method-detail/components/MethodDetailInfo';
+import MethodDetailInfo from '@pages/method-detail/components/MethodDetailInfo';
+import MethodDetailClazz from '@pages/method-detail/components/MethodDetailClazz';
 
+import {getErrorMsg} from '../../lib/commonUiUtils';
+import {
+    searchMethodDetail,
+    searchMethodDetailClear
+} from '../../store/methodStore';
 /*
  * Method 상세 조회
  */
@@ -16,6 +23,15 @@ const MethodDetail = () => {
     const history = useHistory();
     const location = useLocation();
 
+    useEffect(() => {
+        if (location.state != null) {
+            dispatch(searchMethodDetailClear());
+            dispatch(searchMethodDetail(location.state.id));
+        } else {
+            // alert('TEST');
+        }
+    }, []);
+
     return (
         <>
             {/* <Spinner isLoading={searchLoading} /> */}
@@ -23,6 +39,12 @@ const MethodDetail = () => {
                 <Row>
                     <Col xs="12">
                         <ContentHeader title="methodDetail" />
+                    </Col>
+                    <Col xs="8">
+                        <MethodDetailInfo />
+                    </Col>
+                    <Col xs="4">
+                        <MethodDetailClazz />
                     </Col>
                 </Row>
             </Container>

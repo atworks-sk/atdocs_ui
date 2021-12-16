@@ -17,3 +17,11 @@ export const searchMethodList = async ({
     );
     return response;
 };
+
+/*
+ * method detail 조회
+ */
+export const searchMethodDetail = async ({id}) => {
+    const response = await axios.get(`/method/searchDetail/${id}`);
+    return response;
+};

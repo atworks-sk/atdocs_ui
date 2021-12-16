@@ -12,7 +12,7 @@ import {
 const PREFIX = 'CLAZZ';
 
 /*
- * 프로젝트 리스트 조회
+ * CLAZZ 리스트 조회
  * 리스트 조회 : searchClazzList (SEARCH_CLAZZ_LIST)
  * 리스트 초기화 : searchClazzListClear (SEARCH_CLAZZ_LIST_CLEAR)
  * Form 데이터 설정 : searchClazzListSetForm (SEARCH_CLAZZ_LIST_SET_FORM)
@@ -47,7 +47,7 @@ export const searchClazzListFormInitData = () => {
 };
 
 /*
- * 프로젝트 상세조회
+ * CLAZZ 상세조회
  * 상세 조회 : searchClazzDetail (SEARCH_CLAZZ_DETAIL)
  * 상세 조회 초기화 : searchClazzDetailClear (SEARCH_CLAZZ_DETAIL_CLEAR)
  */
@@ -55,6 +55,7 @@ const SEARCH_CLAZZ_DETAIL = `${PREFIX}/SEARCH_CLAZZ_DETAIL`; // 요청 시작
 const SEARCH_CLAZZ_DETAIL_SUCCESS = `${PREFIX}/SEARCH_CLAZZ_DETAIL_SUCCESS`; // 요청 성공
 const SEARCH_CLAZZ_DETAIL_ERROR = `${PREFIX}/SEARCH_CLAZZ_DETAIL_ERROR`; // 요청 실패
 const SEARCH_CLAZZ_DETAIL_CLEAR = `${PREFIX}/SEARCH_CLAZZ_DETAIL_CLEAR`; // 조회 결과 초기화
+
 export const searchClazzDetail = (id) => ({
     type: SEARCH_CLAZZ_DETAIL,
     payload: {

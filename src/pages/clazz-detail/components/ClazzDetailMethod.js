@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
+import {useHistory, useLocation} from 'react-router-dom';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
 import JavaSource from '@pages/common/popup/JavaSource';
+import {FaSearch} from 'react-icons/fa';
 import {showModalJavaSource} from '../../../store/commonStore';
 
 /*
@@ -10,6 +12,7 @@ import {showModalJavaSource} from '../../../store/commonStore';
  */
 const ClazzDetailMethod = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     // const {data: searchDetail} = useSelector(
     //     (state) => state.clazz.searchClazzDetailRes
@@ -32,6 +35,13 @@ const ClazzDetailMethod = () => {
 
     const onClickMove = (row) => {
         console.log(row);
+
+        history.push({
+            pathname: '/method-detail',
+            state: {
+                id: row.id
+            }
+        });
     };
 
     const renderTableData = () => {
@@ -74,25 +84,21 @@ const ClazzDetailMethod = () => {
                     </>
                 );
             }
+        },
+        {
+            title: '',
+            key: 'button',
+            // eslint-disable-next-line no-unused-vars
+            render: (id, row, column) => {
+                return (
+                    <>
+                        <Button theme="link" onClick={() => onClickMove(row)}>
+                            <FaSearch />
+                        </Button>
+                    </>
+                );
+            }
         }
-        // {
-        //     title: '생성일자',
-        //     key: 'createDateTime'
-        // },
-        // {
-        //     title: '',
-        //     key: 'button',
-        //     // eslint-disable-next-line no-unused-vars
-        //     render: (id, row, column) => {
-        //         return (
-        //             <>
-        //                 <Button theme="link" onClick={() => onClickChange(row)}>
-        //                     <FaSearch />
-        //                 </Button>
-        //             </>
-        //         );
-        //     }
-        // }
     ];
 
     return (

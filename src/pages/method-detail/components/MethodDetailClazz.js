@@ -5,16 +5,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
 import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
 
+import {FaSearch} from 'react-icons/fa';
 /*
  * Clazz 조회/등록/수정 화면
  */
-const ClazzDetailInfo = () => {
+const MethodDetailClazz = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
 
     const {data: searchDetail} = useSelector(
-        (state) => state.clazz.searchClazzDetailRes
+        (state) => state.method.searchMethodDetailRes
     );
 
     const renderAnnotation = () => {
@@ -24,7 +25,20 @@ const ClazzDetailInfo = () => {
                 text += `${obj.expression} `;
             });
         }
+
         return text;
+    };
+
+    /*
+     * 현재 매서드에 상위 클래스로 이동
+     */
+    const onClickClazz = () => {
+        history.push({
+            pathname: '/clazz-detail',
+            state: {
+                id: searchDetail.data.clazzId
+            }
+        });
     };
 
     return (
@@ -34,10 +48,10 @@ const ClazzDetailInfo = () => {
                 body={
                     <>
                         <Row style={{paddingBottom: '10px'}}>
-                            <Col xs="2" style={{textAlign: 'center'}}>
+                            <Col xs="3" style={{textAlign: 'center'}}>
                                 <Form.Label>프로젝트 명</Form.Label>
                             </Col>
-                            <Col xs="4">
+                            <Col xs="9">
                                 <Form.Control
                                     type="text"
                                     disabled
@@ -47,10 +61,12 @@ const ClazzDetailInfo = () => {
                                     }
                                 />
                             </Col>
-                            <Col xs="2" style={{textAlign: 'center'}}>
+                        </Row>
+                        <Row style={{paddingBottom: '10px'}}>
+                            <Col xs="3" style={{textAlign: 'center'}}>
                                 <Form.Label>패키지 명</Form.Label>
                             </Col>
-                            <Col xs="4">
+                            <Col xs="9">
                                 <Form.Control
                                     type="text"
                                     disabled
@@ -61,20 +77,11 @@ const ClazzDetailInfo = () => {
                                 />
                             </Col>
                         </Row>
-                        {/*
                         <Row style={{paddingBottom: '10px'}}>
-                            <Col xs="4" />
-                            <Col xs="1" style={{textAlign: 'center'}}>
-                                <Form.Label>버전</Form.Label>
-                            </Col>
-                            <Col xs="2" /> 
-                        </Row> */}
-
-                        <Row style={{paddingBottom: '10px'}}>
-                            <Col xs="2" style={{textAlign: 'center'}}>
+                            <Col xs="3" style={{textAlign: 'center'}}>
                                 <Form.Label>클래스 명</Form.Label>
                             </Col>
-                            <Col xs="4">
+                            <Col xs="9">
                                 <InputGroup className="mb-2">
                                     <Form.Control
                                         type="text"
@@ -85,29 +92,15 @@ const ClazzDetailInfo = () => {
                                         }
                                     />
                                     <Button
-                                        theme="secondary"
-                                        style={{minWidth: '80px'}}
+                                        theme="link"
+                                        onClick={(e) => onClickClazz()}
                                     >
-                                        {searchDetail &&
-                                            searchDetail.data.clazzTypeName}
+                                        <FaSearch />
                                     </Button>
                                 </InputGroup>
                             </Col>
-                            <Col xs="2" style={{textAlign: 'center'}}>
-                                <Form.Label>라인수</Form.Label>
-                            </Col>
-                            <Col xs="2">
-                                <Form.Control
-                                    type="text"
-                                    disabled
-                                    value={
-                                        searchDetail &&
-                                        `${searchDetail.data.line} line`
-                                    }
-                                />
-                            </Col>
                         </Row>
-
+                        {/* 
                         <Row>
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>어노테이션</Form.Label>
@@ -117,11 +110,11 @@ const ClazzDetailInfo = () => {
                                     {renderAnnotation()}
                                 </Form.Label>
                             </Col>
-                        </Row>
+                        </Row> */}
                     </>
                 }
             />
         </>
     );
 };
-export default ClazzDetailInfo;
+export default MethodDetailClazz;

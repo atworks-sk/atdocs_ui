@@ -59,8 +59,6 @@ const ClazzDetail = () => {
             } else {
                 setTabKey('T1');
             }
-            // toast.error(getErrorMsg(searchError, 'search'));
-            // dispatch(searchClazzListClear());
         }
     }, [searchDetail, searchError]);
 
