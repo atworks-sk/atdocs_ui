@@ -31,7 +31,7 @@ const MethodDetailInfo = () => {
     };
 
     const renderReturnData = () => {
-        return 'test';
+        return <span>TEST</span>;
     };
 
     return (
@@ -44,7 +44,7 @@ const MethodDetailInfo = () => {
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>매서드 명</Form.Label>
                             </Col>
-                            <Col xs="4">
+                            <Col xs="5">
                                 <Form.Control
                                     type="text"
                                     disabled
@@ -57,7 +57,7 @@ const MethodDetailInfo = () => {
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>접근제한자</Form.Label>
                             </Col>
-                            <Col xs="2">
+                            <Col xs="3">
                                 <Form.Control
                                     type="text"
                                     disabled
@@ -72,11 +72,13 @@ const MethodDetailInfo = () => {
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>리턴데이터</Form.Label>
                             </Col>
-                            <Col xs="4">{renderReturnData()}</Col>
+                            <Col xs="5">
+                                <Form.Label>{renderReturnData()}</Form.Label>
+                            </Col>
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>라인수</Form.Label>
                             </Col>
-                            <Col xs="2">
+                            <Col xs="3">
                                 <Form.Control
                                     type="text"
                                     disabled
