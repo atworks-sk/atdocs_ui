@@ -144,6 +144,28 @@ const MethodDetailInfo = () => {
         // return <span>TEST</span>;
     };
 
+    /*
+     * 주석은 존재하는 경우만 보여줍니다.
+     */
+    const renderComment = () => {
+        if (!searchDetail || searchDetail.data.comment === '') return '';
+        return (
+            <Row>
+                <Col xs="2" style={{textAlign: 'center'}}>
+                    <Form.Label>주석</Form.Label>
+                </Col>
+                <Col xs="10">
+                    <Form.Control
+                        disabled
+                        as="textarea"
+                        rows={5}
+                        value={searchDetail && searchDetail.data.comment}
+                    />
+                </Col>
+            </Row>
+        );
+    };
+
     return (
         <>
             <Card
@@ -229,6 +251,7 @@ const MethodDetailInfo = () => {
                                 />
                             </Col>
                         </Row>
+                        {renderComment()}
                     </>
                 }
             />
