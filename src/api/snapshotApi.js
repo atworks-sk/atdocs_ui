@@ -16,3 +16,22 @@ export const searchSnapshotList = async ({
     );
     return response;
 };
+
+/*
+ * Snapshot 추가 (비동기 방식)
+ */
+export const createSnapshot = async ({projectId, dirPath}) => {
+    const response = await axios.post('/snapshot/create', {
+        projectId,
+        dirPath
+    });
+    return response;
+};
+
+/*
+ * Snapshot 삭제 API
+ */
+export const deleteSnapshot = async ({id}) => {
+    const response = await axios.delete(`/snapshot/delete/${id}`);
+    return response;
+};

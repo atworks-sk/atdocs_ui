@@ -223,6 +223,13 @@ export default function bulktest(state = initialState, action) {
                 'deleteProjectRes',
                 true
             )(state, action);
+
+        case DELETE_PROJECT_CLEAR:
+            return {
+                ...state,
+                deleteProjectRes: reducerUtils.initial()
+            };
+
         default:
             return state;
     }

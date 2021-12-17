@@ -7,7 +7,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {toast} from 'react-toastify';
 import {
     searchSnapshotList,
-    searchSnapshotListSetForm
+    searchSnapshotListSetForm,
+    deleteSnapshot
 } from '../../../store/snapshotStore';
 import {getErrorMsg} from '../../../lib/commonUiUtils';
 /*
@@ -24,6 +25,12 @@ const SnapshotTable = () => {
         (state) => state.snapshot
     );
 
+    const {
+        loading: deleteLoading,
+        data: deleteData,
+        error: deleteError
+    } = useSelector((state) => state.snapshot.deleteSnapshotRes);
+
     const movePage = (page) => {
         const searchFormT = {...searchForm};
         searchFormT.page = page;
@@ -32,13 +39,25 @@ const SnapshotTable = () => {
     };
 
     const onClickDelete = (row) => {
-        // history.push({
-        //     pathname: '/clazz-detail',
-        //     state: {
-        //         id: row.id
-        //     }
-        // });
+        dispatch(deleteSnapshot(row.id));
     };
+
+    const onSearchList = (_seachFrom = searchForm) => {
+        dispatch(searchSnapshotList(_seachFrom));
+    };
+
+    /*
+     * 프로젝트 저자 성공/실패
+     */
+    useEffect(() => {
+        if (!deleteLoading && deleteData) {
+            onSearchList();
+        }
+        if (!deleteLoading && deleteError) {
+            toast.error(getErrorMsg(deleteError, 'save'));
+            onSearchList();
+        }
+    }, [deleteData, deleteError]);
 
     const columns = [
         {
@@ -98,7 +117,7 @@ const SnapshotTable = () => {
 
     return (
         <>
-            {/* <Spinner isLoading={deleteLoading} /> */}
+            <Spinner isLoading={deleteLoading} />
             <Table
                 tableName="조회 결과"
                 // onDoubleClick={(id, row) => {
