@@ -114,8 +114,7 @@ const SnapshotSearch = () => {
                                                     >
                                                         {obj.projectName}
                                                     </option>
-                                                ))}{' '}
-                                            {/* */}
+                                                ))}
                                         </Form.Control>
                                     </Form.Group>
                                 </Col>
