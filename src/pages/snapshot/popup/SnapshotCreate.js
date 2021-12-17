@@ -55,7 +55,7 @@ const SnapshotCreate = () => {
         enableReinitialize: true,
         initialValues: {
             projectId: '',
-            dirPath: ''
+            dirPath: 'C:/Users/kimtaehan/testkim'
         },
         validationSchema: Yup.object({
             // : Yup.string().required(getInputValidMsg('')),
