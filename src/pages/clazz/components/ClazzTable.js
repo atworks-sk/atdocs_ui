@@ -55,6 +55,10 @@ const ClazzTable = () => {
             key: 'clazzName'
         },
         {
+            title: '파일 유형',
+            key: 'fileTypeName'
+        },
+        {
             title: '클래스 유형',
             key: 'clazzTypeName'
         },
