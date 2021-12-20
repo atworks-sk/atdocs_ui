@@ -3,30 +3,30 @@ import React, {useEffect} from 'react';
 import {Container, Row, Col, Form, Modal} from 'react-bootstrap';
 import {Button, Card, Spinner} from '@components';
 import {useDispatch, useSelector} from 'react-redux';
-import {hideModalJavaSource} from '../../../store/commonStore';
+import {hideModalComment} from '../../../store/commonStore';
 
 /*
- * [공통팝업] 자바 소스 출력하는 팝업
+ * [공통팝업] 주석을 보여주는 팝업
  */
-const JavaSource = () => {
+const Comment = () => {
     const dispatch = useDispatch();
     const [modalShow, setModalShow] = React.useState(false);
     const handleClose = () => {
-        dispatch(hideModalJavaSource());
+        dispatch(hideModalComment());
         setModalShow(false);
     };
     const handleShow = () => setModalShow(true);
 
-    const {javaSourceModalInitData} = useSelector((state) => state.common);
+    const {commentModalInitData} = useSelector((state) => state.common);
 
     /*
      * Popup open event
      */
     useEffect(() => {
-        if (javaSourceModalInitData.showModal && !modalShow) {
+        if (commentModalInitData.showModal && !modalShow) {
             handleShow();
         }
-    }, [javaSourceModalInitData.showModal]);
+    }, [commentModalInitData.showModal]);
 
     return (
         <>
@@ -40,19 +40,19 @@ const JavaSource = () => {
                 <Form>
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            {javaSourceModalInitData &&
-                                javaSourceModalInitData.initData.methodName}
+                            {commentModalInitData &&
+                                commentModalInitData.initData.title}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Control
                             readOnly
                             as="textarea"
-                            rows={20}
+                            rows={5}
                             placeholder=""
                             value={
-                                javaSourceModalInitData &&
-                                javaSourceModalInitData.initData.fullContents
+                                commentModalInitData &&
+                                commentModalInitData.initData.comment
                             }
                         />
                     </Modal.Body>
@@ -67,4 +67,4 @@ const JavaSource = () => {
     );
 };
 
-export default JavaSource;
+export default Comment;

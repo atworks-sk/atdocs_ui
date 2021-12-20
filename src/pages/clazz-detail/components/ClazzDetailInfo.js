@@ -5,6 +5,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
 import {Row, Col, Form, InputGroup} from 'react-bootstrap';
 import Button from '../../../components/button/Button';
+import {
+    showModalAnnotation,
+    showModalComment,
+    showModalInheritance
+} from '../../../store/commonStore';
 /*
  * Clazz 조회/등록/수정 화면
  */
@@ -17,14 +22,89 @@ const ClazzDetailInfo = () => {
         (state) => state.clazz.searchClazzDetailRes
     );
 
-    const renderAnnotation = () => {
-        let text = '';
-        if (searchDetail) {
-            searchDetail.data.clazzAnnotationList.forEach((obj) => {
-                text += `${obj.expression} `;
-            });
+    /*
+     * 추가적인 옵션 버튼
+     */
+    const renderAddOption = () => {
+        if (!searchDetail) {
+            return '';
         }
-        return text;
+
+        /*
+         * Annotaion
+         */
+        const onClickAnnotaion = () => {
+            const initData = {
+                title: '클래스 어노테이션',
+                annotationList: searchDetail.data.clazzAnnotationList
+            };
+            dispatch(showModalAnnotation(initData));
+        };
+
+        /*
+         * comment
+         */
+        const onClickComment = () => {
+            const initData = {
+                title: '클래스 주석',
+                comment: searchDetail.data.comment
+            };
+            dispatch(showModalComment(initData));
+        };
+
+        const onClickInheritance = () => {
+            const initData = {
+                title: '클래스 상속관계',
+                inheritanceList: searchDetail.data.inheritanceList,
+                inheritancedList: searchDetail.data.inheritancedList
+            };
+            dispatch(showModalInheritance(initData));
+        };
+
+        const disalbedAnnotaion =
+            searchDetail.data.clazzAnnotationList.length > 0;
+
+        const disalbedInheritance =
+            searchDetail.data.inheritanceList.length > 0 ||
+            searchDetail.data.inheritancedList.length > 0;
+
+        const disalbedComment = searchDetail.data.comment !== '';
+        // renderInheritance
+        return (
+            <Row style={{paddingTop: '20px', paddingLeft: '20px'}}>
+                &nbsp;&nbsp;
+                <Button
+                    theme="primary"
+                    disabled={!disalbedAnnotaion}
+                    onClick={onClickAnnotaion}
+                    style={{width: '120px'}}
+                >
+                    어노테이션
+                </Button>
+                &nbsp;&nbsp;
+                <Button
+                    theme="success"
+                    disabled={!disalbedInheritance}
+                    onClick={onClickInheritance}
+                    style={{width: '120px'}}
+                >
+                    상속관계
+                </Button>
+                &nbsp;&nbsp;
+                <Button theme="danger" disabled style={{width: '120px'}}>
+                    영향도 분석
+                </Button>
+                &nbsp;&nbsp;
+                <Button
+                    theme="warning"
+                    disabled={!disalbedComment}
+                    onClick={onClickComment}
+                    style={{width: '120px'}}
+                >
+                    주석확인
+                </Button>
+            </Row>
+        );
     };
 
     /*
@@ -55,28 +135,6 @@ const ClazzDetailInfo = () => {
                                 <br />
                             </>
                         ))}
-                    {/* {searchDetail.data.inheritanceList[0].clazzName} */}
-                </Col>
-            </Row>
-        );
-    };
-    /*
-     * 주석은 존재하는 경우만 보여줍니다.
-     */
-    const renderComment = () => {
-        if (!searchDetail || searchDetail.data.comment === '') return '';
-        return (
-            <Row>
-                <Col xs="2" style={{textAlign: 'center'}}>
-                    <Form.Label>주석</Form.Label>
-                </Col>
-                <Col xs="10">
-                    <Form.Control
-                        disabled
-                        as="textarea"
-                        rows={5}
-                        value={searchDetail && searchDetail.data.comment}
-                    />
                 </Col>
             </Row>
         );
@@ -160,33 +218,8 @@ const ClazzDetailInfo = () => {
                             </Col>
                         </Row>
                         {/* {renderInheritance()}
-                        <Row>
-                            <Col xs="2" style={{textAlign: 'center'}}>
-                                <Form.Label>어노테이션</Form.Label>
-                            </Col>
-                            <Col xs="10">
-                                <Form.Label>{renderAnnotation()}</Form.Label>
-                            </Col>
-                        </Row> */}
-                        <Row style={{paddingTop: '20px', paddingLeft: '20px'}}>
-                            &nbsp;&nbsp;
-                            <Button theme="primary" style={{width: '120px'}}>
-                                어노테이션
-                            </Button>
-                            &nbsp;&nbsp;
-                            <Button theme="success" style={{width: '120px'}}>
-                                상속관계
-                            </Button>
-                            &nbsp;&nbsp;
-                            <Button theme="danger" style={{width: '120px'}}>
-                                영향도 분석
-                            </Button>
-                            &nbsp;&nbsp;
-                            <Button theme="warning" style={{width: '120px'}}>
-                                주석확인
-                            </Button>
-                        </Row>
-                        {renderComment()}
+                         */}
+                        {renderAddOption()}
                     </>
                 }
             />

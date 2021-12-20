@@ -5,11 +5,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ContentHeader, Spinner} from '@components';
 import {Container, Row, Col, Tab, Tabs} from 'react-bootstrap';
 
+// components
 import ClazzDetailInfo from '@pages/clazz-detail/components/ClazzDetailInfo';
 import ClazzDetailFile from '@pages/clazz-detail/components/ClazzDetailFile';
 import ClazzDetailMethod from '@pages/clazz-detail/components/ClazzDetailMethod';
 import ClazzDetailData from '@pages/clazz-detail/components/ClazzDetailData';
 import ClazzDetailImport from '@pages/clazz-detail/components/ClazzDetailImport';
+
+// popup
+import Annotation from '@pages/common/popup/Annotation';
+import Comment from '@pages/common/popup/Comment';
+import Inheritance from '@pages/common/popup/Inheritance';
 
 import {toast} from 'react-toastify';
 import {getErrorMsg} from '../../lib/commonUiUtils';
@@ -109,6 +115,9 @@ const ClazzDetail = () => {
                     </Col>
                 </Row>
             </Container>
+            <Annotation />
+            <Comment />
+            <Inheritance />
         </>
     );
 };

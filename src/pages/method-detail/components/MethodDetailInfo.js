@@ -5,8 +5,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
 import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
 import {FaSearch} from 'react-icons/fa';
-import JavaSource from '@pages/common/popup/JavaSource';
-import {showModalJavaSource} from '../../../store/commonStore';
+import Source from '@app/pages/common/popup/Source';
+import {showModalSource} from '../../../store/commonStore';
 
 /*
  * Clazz 조회/등록/수정 화면
@@ -40,7 +40,7 @@ const MethodDetailInfo = () => {
             methodName: searchDetail.data.methodName,
             fullContents: searchDetail.data.fullContents
         };
-        dispatch(showModalJavaSource(initData));
+        dispatch(showModalSource(initData));
     };
 
     const renderParamData = (row) => {
@@ -181,7 +181,7 @@ const MethodDetailInfo = () => {
 
     return (
         <>
-            <JavaSource />
+            <Source />
             <Card
                 title="매서드 정보"
                 body={

@@ -3,10 +3,10 @@ import React, {useEffect} from 'react';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
 import {FaSearch} from 'react-icons/fa';
-import JavaSource from '@pages/common/popup/JavaSource';
+import Source from '@app/pages/common/popup/Source';
 
 import {useHistory} from 'react-router-dom';
-import {showModalJavaSource} from '../../../store/commonStore';
+import {showModalSource} from '../../../store/commonStore';
 
 /*
  * Project 검색조건 Contanier
@@ -27,7 +27,7 @@ const ClazzDetailMethod = () => {
             methodName: row.methodName,
             fullContents: row.fullContents
         };
-        dispatch(showModalJavaSource(initData));
+        dispatch(showModalSource(initData));
     };
 
     /*
@@ -101,8 +101,7 @@ const ClazzDetailMethod = () => {
 
     return (
         <>
-            {/* <Spinner isLoading={deleteLoading} /> */}
-            <JavaSource />
+            <Source />
             <Table
                 tableName="메서드 리스트"
                 onDoubleClick={(id, row) => {
