@@ -56,13 +56,11 @@ const ClazzDetailImport = ({cardName, data}) => {
 
     return (
         <>
-            {/* <Spinner isLoading={deleteLoading} /> */}
             <Table
                 tableName={cardName}
                 onDoubleClick={(id, row) => {
                     onClickChange(row);
                 }}
-                // movePage={movePage}
                 rowKey="id"
                 columns={columns}
                 disablePageView
