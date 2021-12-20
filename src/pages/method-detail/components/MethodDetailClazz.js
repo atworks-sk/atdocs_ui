@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
 import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
 
-import {FaSearch} from 'react-icons/fa';
+import {FaArrowRight} from 'react-icons/fa';
 /*
  * Clazz 조회/등록/수정 화면
  */
@@ -79,6 +79,21 @@ const MethodDetailClazz = () => {
                         </Row>
                         <Row style={{paddingBottom: '10px'}}>
                             <Col xs="3" style={{textAlign: 'center'}}>
+                                <Form.Label>클래스 유형</Form.Label>
+                            </Col>
+                            <Col xs="9">
+                                <Form.Control
+                                    type="text"
+                                    disabled
+                                    value={
+                                        searchDetail &&
+                                        searchDetail.data.fileTypeName
+                                    }
+                                />
+                            </Col>
+                        </Row>
+                        <Row style={{paddingBottom: '10px'}}>
+                            <Col xs="3" style={{textAlign: 'center'}}>
                                 <Form.Label>클래스 명</Form.Label>
                             </Col>
                             <Col xs="9">
@@ -95,7 +110,7 @@ const MethodDetailClazz = () => {
                                         theme="link"
                                         onClick={(e) => onClickClazz()}
                                     >
-                                        <FaSearch />
+                                        <FaArrowRight />
                                     </Button>
                                 </InputGroup>
                             </Col>

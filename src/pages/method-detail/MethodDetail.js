@@ -10,7 +10,8 @@ import {toast} from 'react-toastify';
 import MethodDetailInfo from '@pages/method-detail/components/MethodDetailInfo';
 import MethodDetailClazz from '@pages/method-detail/components/MethodDetailClazz';
 
-import {getErrorMsg} from '../../lib/commonUiUtils';
+import Source from '@app/pages/common/popup/Source';
+import Comment from '@pages/common/popup/Comment';
 import {
     searchMethodDetail,
     searchMethodDetailClear
@@ -52,6 +53,8 @@ const MethodDetail = () => {
                     </Col>
                 </Row>
             </Container>
+            <Source />
+            <Comment />
         </>
     );
 };

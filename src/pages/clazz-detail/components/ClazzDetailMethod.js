@@ -51,9 +51,6 @@ const ClazzDetailMethod = () => {
     };
 
     const renderParamCnt = (row) => {
-        // eslint-disable-next-line no-debugger
-        debugger;
-
         const {paramCnt} = row;
 
         return `${paramCnt} 건`;

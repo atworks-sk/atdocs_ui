@@ -3,10 +3,10 @@ import React, {useEffect} from 'react';
 import {useHistory, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {Card} from '@components';
-import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
+import {Row, Col, Form, InputGroup} from 'react-bootstrap';
 import {FaSearch} from 'react-icons/fa';
-import Source from '@app/pages/common/popup/Source';
-import {showModalSource} from '../../../store/commonStore';
+import Button from '../../../components/button/Button';
+import {showModalSource, showModalComment} from '../../../store/commonStore';
 
 /*
  * Clazz 조회/등록/수정 화면
@@ -33,14 +33,78 @@ const MethodDetailInfo = () => {
     };
 
     /*
-     * 소스 보여주기
+     * 추가적인 옵션 버튼
      */
-    const onClickShowSource = () => {
-        const initData = {
-            methodName: searchDetail.data.methodName,
-            fullContents: searchDetail.data.fullContents
+    const renderAddOption = () => {
+        if (!searchDetail) {
+            return '';
+        }
+        /*
+         * 소스 보여주기
+         */
+        const onClickSource = () => {
+            const initData = {
+                methodName: searchDetail.data.methodName,
+                fullContents: searchDetail.data.fullContents
+            };
+            dispatch(showModalSource(initData));
         };
-        dispatch(showModalSource(initData));
+
+        /*
+         * comment
+         */
+        const onClickComment = () => {
+            const initData = {
+                title: '매서드 주석',
+                comment: searchDetail.data.comment
+            };
+            dispatch(showModalComment(initData));
+        };
+
+        // const disalbedAnnotaion =
+        //     searchDetail.data.clazzAnnotationList.length > 0;
+
+        // const disalbedInheritance =
+        //     searchDetail.data.inheritanceList.length > 0 ||
+        //     searchDetail.data.inheritedList.length > 0;
+
+        const disalbedComment = searchDetail.data.comment !== '';
+        // renderInheritance
+        return (
+            <Row style={{paddingTop: '20px', paddingLeft: '20px'}}>
+                &nbsp;&nbsp;
+                <Button
+                    theme="primary"
+                    // disabled={!disalbedAnnotaion}
+                    onClick={onClickSource}
+                    style={{width: '120px'}}
+                >
+                    소스보기
+                </Button>
+                &nbsp;&nbsp;
+                <Button
+                    theme="warning"
+                    disabled={!disalbedComment}
+                    onClick={onClickComment}
+                    style={{width: '120px'}}
+                >
+                    주석확인
+                </Button>
+                {/* &nbsp;&nbsp;
+                <Button
+                    theme="success"
+                    // disabled={!disalbedInheritance}
+                    // onClick={onClickInheritance}
+                    style={{width: '120px'}}
+                >
+                    상속관계
+                </Button> */}
+                &nbsp;&nbsp;
+                <Button theme="danger" disabled style={{width: '120px'}}>
+                    프로세스
+                </Button>
+            </Row>
+        );
     };
 
     const renderParamData = (row) => {
@@ -68,8 +132,10 @@ const MethodDetailInfo = () => {
                             }
                             style={{color: 'BLUE'}}
                         >
-                            {`${obj.elementName}`}
+                            {`${obj.elementClazzName}`}
                         </Form.Label>
+                        &nbsp; &nbsp;
+                        <Form.Label>{`${row.filedName}`}</Form.Label>
                         <span>{afterFix}</span>
                     </>
                 );
@@ -78,7 +144,7 @@ const MethodDetailInfo = () => {
                 return (
                     <>
                         <span>{prefix}</span>
-                        <Form.Label>{`${obj.elementName}`}</Form.Label>
+                        <Form.Label>{`${obj.elementClazzName}`}</Form.Label>
                         <span>{afterFix}</span>
                         &nbsp; &nbsp;
                         <Form.Label>{`${row.filedName}`}</Form.Label>
@@ -88,7 +154,7 @@ const MethodDetailInfo = () => {
             return (
                 <>
                     <span>{prefix}</span>
-                    <Form.Label>{`${obj.elementName}`}</Form.Label>
+                    <Form.Label>{`${obj.elementClazzName}`}</Form.Label>
                     <span>{afterFix}</span>
                 </>
             );
@@ -181,7 +247,6 @@ const MethodDetailInfo = () => {
 
     return (
         <>
-            <Source />
             <Card
                 title="매서드 정보"
                 body={
@@ -223,22 +288,14 @@ const MethodDetailInfo = () => {
                                 <Form.Label>라인수</Form.Label>
                             </Col>
                             <Col xs="3">
-                                <InputGroup className="mb-2">
-                                    <Form.Control
-                                        type="text"
-                                        disabled
-                                        value={
-                                            searchDetail &&
-                                            `${searchDetail.data.line} line`
-                                        }
-                                    />
-                                    <Button
-                                        theme="link"
-                                        onClick={(e) => onClickShowSource()}
-                                    >
-                                        <FaSearch />
-                                    </Button>
-                                </InputGroup>
+                                <Form.Control
+                                    type="text"
+                                    disabled
+                                    value={
+                                        searchDetail &&
+                                        `${searchDetail.data.line} line`
+                                    }
+                                />
                             </Col>
                         </Row>
                         <Row style={{paddingBottom: '10px'}}>
@@ -273,7 +330,8 @@ const MethodDetailInfo = () => {
                                 />
                             </Col>
                         </Row>
-                        {renderComment()}
+                        {/* {renderComment()} */}
+                        {renderAddOption()}
                     </>
                 }
             />
