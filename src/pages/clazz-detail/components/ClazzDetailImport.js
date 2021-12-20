@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
-import {FaSearch, FaTrash} from 'react-icons/fa';
+import {FaArrowRight} from 'react-icons/fa';
 import {useHistory} from 'react-router-dom';
 import {Button, Table} from '@components';
 
@@ -14,7 +14,7 @@ const ClazzDetailImport = ({cardName, data}) => {
     const history = useHistory();
 
     const onClickChange = (row) => {
-        dispatch(searchClazzDetail(row.id));
+        if (row.id !== 0) dispatch(searchClazzDetail(row.id));
     };
 
     const renderTableData = () => {
@@ -45,8 +45,12 @@ const ClazzDetailImport = ({cardName, data}) => {
             render: (id, row, column) => {
                 return (
                     <>
-                        <Button theme="link" onClick={() => onClickChange(row)}>
-                            <FaSearch />
+                        <Button
+                            theme="link"
+                            onClick={() => onClickChange(row)}
+                            disabled={row.id === 0}
+                        >
+                            <FaArrowRight />
                         </Button>
                     </>
                 );

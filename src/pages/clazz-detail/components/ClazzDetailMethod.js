@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
-import {FaSearch} from 'react-icons/fa';
+import {FaArrowRight} from 'react-icons/fa';
 import Source from '@app/pages/common/popup/Source';
 
 import {useHistory} from 'react-router-dom';
@@ -50,6 +50,16 @@ const ClazzDetailMethod = () => {
         return temp;
     };
 
+    const renderParamCnt = (row) => {
+        // eslint-disable-next-line no-debugger
+        debugger;
+
+        const {paramCnt} = row;
+
+        return `${paramCnt} 건`;
+        //
+    };
+
     const columns = [
         {
             title: '접근제한자',
@@ -65,9 +75,9 @@ const ClazzDetailMethod = () => {
         },
         {
             title: '파라메터',
-            key: 'methodDesc',
+            key: 'paramCnt',
             render: (id, row, column) => {
-                return <>3건</>;
+                return <>{renderParamCnt(row)}</>;
             }
         },
         {
@@ -91,7 +101,7 @@ const ClazzDetailMethod = () => {
                 return (
                     <>
                         <Button theme="link" onClick={() => onClickMethod(row)}>
-                            <FaSearch />
+                            <FaArrowRight />
                         </Button>
                     </>
                 );

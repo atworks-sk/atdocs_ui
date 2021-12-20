@@ -56,7 +56,7 @@ const ClazzDetailInfo = () => {
             const initData = {
                 title: '클래스 상속관계',
                 inheritanceList: searchDetail.data.inheritanceList,
-                inheritancedList: searchDetail.data.inheritancedList
+                inheritedList: searchDetail.data.inheritedList
             };
             dispatch(showModalInheritance(initData));
         };
@@ -66,7 +66,7 @@ const ClazzDetailInfo = () => {
 
         const disalbedInheritance =
             searchDetail.data.inheritanceList.length > 0 ||
-            searchDetail.data.inheritancedList.length > 0;
+            searchDetail.data.inheritedList.length > 0;
 
         const disalbedComment = searchDetail.data.comment !== '';
         // renderInheritance

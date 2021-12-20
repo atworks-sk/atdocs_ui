@@ -3,9 +3,11 @@ import React, {useEffect} from 'react';
 import {Form, Modal, Row, Col} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {Table} from '@components';
+import {FaArrowRight} from 'react-icons/fa';
 import Button from '../../../components/button/Button';
 import {hideModalInheritance} from '../../../store/commonStore';
-
+import {searchClazzDetail} from '../../../store/clazzStore';
+/*
 /*
  * [공통팝업] 자바 소스 출력하는 팝업
  */
@@ -26,18 +28,47 @@ const Inheritance = () => {
         }
     }, [inheritanceModalInitData.showModal]);
 
+    const onClickChange = (row) => {
+        if (row.id !== 0) {
+            handleClose();
+            dispatch(searchClazzDetail(row.id));
+        }
+    };
+
     const columns = [
         {
             title: '패키지명',
-            key: 'packageName'
+            key: 'packageName',
+            width: '40%'
         },
         {
             title: '클래스유형',
-            key: 'fileTypeName'
+            key: 'fileTypeName',
+            width: '20%'
         },
         {
             title: '클래스명',
-            key: 'clazzName'
+            key: 'clazzName',
+            width: '30%'
+        },
+        {
+            title: '',
+            key: 'button',
+            width: '10%',
+            // eslint-disable-next-line no-unused-vars
+            render: (id, row, column) => {
+                return (
+                    <>
+                        <Button
+                            theme="link"
+                            onClick={() => onClickChange(row)}
+                            disabled={row.id === 0}
+                        >
+                            <FaArrowRight />
+                        </Button>
+                    </>
+                );
+            }
         }
         // {
         //     title: '',
@@ -107,7 +138,7 @@ const Inheritance = () => {
                                     isCard="N"
                                     data={renderTableData(
                                         inheritanceModalInitData.initData
-                                            .inheritancedList
+                                            .inheritedList
                                     )}
                                 />
                             </Col>
