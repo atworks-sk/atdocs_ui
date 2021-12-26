@@ -19,7 +19,8 @@ const ContentHeader = ({title}) => {
             {id: 0, text: homeText, link: '/'},
             {id: 0, text: t('common.menuDesc.method'), link: '/method'}
         ],
-        snapshot: [{id: 0, text: homeText, link: '/'}]
+        snapshot: [{id: 0, text: homeText, link: '/'}],
+        rest: [{id: 0, text: homeText, link: '/'}]
     };
 
     const listItem = links[title].map((obj, index) => (

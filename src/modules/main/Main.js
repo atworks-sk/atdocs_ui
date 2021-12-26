@@ -8,6 +8,8 @@ import ClazzDetail from '@pages/clazz-detail/ClazzDetail';
 import Method from '@pages/method/Method';
 import MethodDetail from '@pages/method-detail/MethodDetail';
 import Snapshot from '@pages/snapshot/Snapshot';
+import Rest from '@app/pages/Rest/Rest';
+
 import MenuSidebar from '@modules/main/menu-sidebar/MenuSidebar';
 import Header from './header/Header';
 import Footer from './footer/Footer';
@@ -80,6 +82,7 @@ const Main = () => {
                                 path="/snapshot"
                                 component={Snapshot}
                             />
+                            <Route exact path="/rest" component={Rest} />
                         </Switch>
                     </section>
                 </div>

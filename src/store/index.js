@@ -8,6 +8,7 @@ import project, {projectSaga} from './projectStore';
 import clazz, {clazzSaga} from './clazzStore';
 import method, {methodSaga} from './methodStore';
 import snapshot, {snapshotSaga} from './snapshotStore';
+import rest, {restSaga} from './restStore';
 
 const rootReducer = combineReducers({
     commonUI,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     dashboard,
     clazz,
     method,
-    snapshot
+    snapshot,
+    rest
 });
 export function* rootSaga() {
     yield all([
@@ -25,7 +27,8 @@ export function* rootSaga() {
         projectSaga(),
         clazzSaga(),
         methodSaga(),
-        snapshotSaga()
+        snapshotSaga(),
+        restSaga()
     ]); // all 은 배열 안의 여러 사가를 동시에 실행시켜줍니다.
 }
 

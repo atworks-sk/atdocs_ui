@@ -52,8 +52,8 @@ const MenuSidebar = () => {
                                 <p>매서드</p>
                             </NavLink>
                         </li>
-                        <li key="api" className="nav-item">
-                            <NavLink to="/api" exact className="nav-link">
+                        <li key="rest" className="nav-item">
+                            <NavLink to="/rest" exact className="nav-link">
                                 <i className="nav-icon fas fa-search" />
                                 <p>API 찾기</p>
                             </NavLink>
