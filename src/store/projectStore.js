@@ -24,6 +24,27 @@ const SEARCH_PROJECT_LIST_ERROR = `${PREFIX}/SEARCH_PROJECT_LIST_ERROR`; // 요�
 const SEARCH_PROJECT_LIST_CLEAR = `${PREFIX}/SEARCH_PROJECT_LIST_CLEAR`; // 조회 결과 초기화
 const SEARCH_PROJECT_LIST_SET_FORM = `${PREFIX}/SEARCH_PROJECT_LIST_SET_FORM`;
 
+export const searchProjectList = (searchForm) => ({
+    type: SEARCH_PROJECT_LIST,
+    payload: searchForm
+});
+export const searchProjectListClear = () => ({
+    type: SEARCH_PROJECT_LIST_CLEAR
+});
+export const searchProjectListSetForm = (searchProjectListForm) => ({
+    type: SEARCH_PROJECT_LIST_SET_FORM,
+    payload: {
+        searchProjectListForm
+    }
+});
+export const searchProjectListFormInitData = () => {
+    return {
+        projectName: '',
+        page: 1,
+        size: 10
+    };
+};
+
 /*
  * 프로젝트 등록/수정 팝업
  * SHOW : showModalProjectUpdate (SHOW_MODAL_PROJECT_UPDATE)
@@ -51,34 +72,6 @@ const DELETE_PROJECT = `${PREFIX}/DELETE_PROJECT`; // 요청 시작
 const DELETE_PROJECT_SUCCESS = `${PREFIX}/DELETE_PROJECT_SUCCESS`; // 요청 성공
 const DELETE_PROJECT_ERROR = `${PREFIX}/DELETE_PROJECT_ERROR`; // 요청 실패
 const DELETE_PROJECT_CLEAR = `${PREFIX}/DELETE_PROJECT_CLEAR`; // 조회 결과 초기화
-
-/*
- * 프로젝트 리스트 조회
- * 리스트 조회 : searchProjectList (SEARCH_PROJECT_LIST)
- * 리스트 초기화 : searchProjectListClear (SEARCH_PROJECT_LIST_CLEAR)
- * Form 데이터 설정 : searchProjectListSetForm (SEARCH_PROJECT_LIST_SET_FORM)
- * Form 초기값 조회 : searchProjectListFormInitData
- */
-export const searchProjectList = (searchForm) => ({
-    type: SEARCH_PROJECT_LIST,
-    payload: searchForm
-});
-export const searchProjectListClear = () => ({
-    type: SEARCH_PROJECT_LIST_CLEAR
-});
-export const searchProjectListSetForm = (searchProjectListForm) => ({
-    type: SEARCH_PROJECT_LIST_SET_FORM,
-    payload: {
-        searchProjectListForm
-    }
-});
-export const searchProjectListFormInitData = () => {
-    return {
-        projectName: '',
-        page: 1,
-        size: 10
-    };
-};
 
 /*
  * 프로젝트 등록/수정 팝업
