@@ -90,15 +90,6 @@ const MethodDetailInfo = () => {
                 >
                     주석확인
                 </Button>
-                {/* &nbsp;&nbsp;
-                <Button
-                    theme="success"
-                    // disabled={!disalbedInheritance}
-                    // onClick={onClickInheritance}
-                    style={{width: '120px'}}
-                >
-                    상속관계
-                </Button> */}
                 &nbsp;&nbsp;
                 <Button theme="danger" disabled style={{width: '120px'}}>
                     프로세스
@@ -107,142 +98,195 @@ const MethodDetailInfo = () => {
         );
     };
 
-    const renderParamData = (row) => {
-        if (!searchDetail) return '';
+    const renderParamData = () => {
+        // no return data
+        if (!searchDetail || searchDetail.data.methodParamList === null)
+            return '';
 
-        const {methodParamElementList} = row;
+        const {methodParamList} = searchDetail.data;
 
-        const renderTemp = (obj, size, filedName) => {
-            let prefix = '';
-            let afterFix = '';
+        const renderParamType = (methodParamType, isFirst) => {
+            const renderParamTypeList = (obj, idx) => {
+                const renderObject = (obj3, idx3, size) => {
+                    const comma = idx3 + 1 === size ? '' : ', ';
+                    const prefix = idx3 === 0 ? '<' : '';
+                    const afterfix = idx3 + 1 === size ? '>' : '';
 
-            if (obj.elementDepth !== 0 && size !== 1) {
-                prefix = '<';
-            }
-            if (obj.elementDepth === size - 1 && size !== 1) {
-                afterFix = '>';
-            }
-            if (obj.elementClazzId !== 0) {
+                    if (obj3.clazzId === 0) {
+                        return (
+                            <>
+                                <Form.Label>{prefix}</Form.Label>
+                                <Form.Label>{`${obj3.clazzName}`}</Form.Label>
+                                {renderParamType(
+                                    obj3.methodParamTypeList,
+                                    false
+                                )}
+                                <Form.Label>{`${comma}`}</Form.Label>
+                                <Form.Label>{afterfix}</Form.Label>
+                            </>
+                        );
+                    }
+                    return (
+                        <>
+                            <Form.Label>{prefix}</Form.Label>
+                            <Form.Label
+                                onClick={(e) => onClickMoveClazz(obj3.clazzId)}
+                                style={{color: 'BLUE'}}
+                            >
+                                {` ${obj3.clazzName}`}
+                            </Form.Label>
+                            {/* {renderParamData(obj3.methodReturnList)} */}
+                            {renderParamType(obj3.methodParamTypeList, false)}
+                            <Form.Label>{`${comma}`}</Form.Label>
+                        </>
+                    );
+                };
+
+                if (obj.methodParamTypeList.length === 0) return <Form.Label />;
+
                 return (
                     <>
-                        <span>{prefix}</span>
-                        <Form.Label
-                            onClick={(e) =>
-                                onClickMoveClazz(obj.elementClazzId)
-                            }
-                            style={{color: 'BLUE'}}
-                        >
-                            {`${obj.elementClazzName}`}
-                        </Form.Label>
-                        &nbsp; &nbsp;
-                        <Form.Label>{`${row.filedName}`}</Form.Label>
-                        <span>{afterFix}</span>
+                        {/* <Form.Label>{'<'}</Form.Label> */}
+                        {obj.methodParamTypeList.map((obj2, idx2) => (
+                            <>
+                                {renderObject(
+                                    obj2,
+                                    idx2,
+                                    obj.methodParamTypeList.length
+                                )}
+                            </>
+                        ))}
+                        {/* <Form.Label>{'>'}</Form.Label> */}
                     </>
                 );
-            }
-            if (obj.elementClazzId === size - 1) {
-                return (
-                    <>
-                        <span>{prefix}</span>
-                        <Form.Label>{`${obj.elementClazzName}`}</Form.Label>
-                        <span>{afterFix}</span>
-                        &nbsp; &nbsp;
-                        <Form.Label>{`${row.filedName}`}</Form.Label>
-                    </>
-                );
-            }
+            };
+
+            //
+            // const afterfix = idx3 + 1 === size ? '>' : '';
             return (
                 <>
-                    <span>{prefix}</span>
-                    <Form.Label>{`${obj.elementClazzName}`}</Form.Label>
-                    <span>{afterFix}</span>
+                    {methodParamType.map((obj, idx) => (
+                        // renderObject(obj, idx, methodReturnList.length)
+                        <>
+                            <Form.Label>
+                                {idx === 0 && !isFirst ? '<' : ''}
+                            </Form.Label>
+                            <Form.Label>{` ${obj.clazzName}`}</Form.Label>
+                            {renderParamTypeList(obj, idx)}
+                            <Form.Label>
+                                {idx + 1 === methodParamType.length && !isFirst
+                                    ? '>'
+                                    : ''}
+                            </Form.Label>
+                        </>
+                    ))}
                 </>
             );
         };
 
-        return (
-            <>
-                {searchDetail &&
-                    methodParamElementList.map((obj) =>
-                        renderTemp(obj, methodParamElementList.length)
-                    )}
-            </>
-        );
-    };
-
-    const renderReturnData = () => {
-        if (!searchDetail) return '';
-
-        const renderTemp = (obj, size) => {
-            let prefix = '';
-            let afterFix = '';
-
-            if (obj.elementDepth !== 0 && size !== 1) {
-                prefix = '<';
-            }
-            if (obj.elementDepth === size - 1 && size !== 1) {
-                afterFix = '>';
-            }
-            if (obj.elementClazzId !== 0) {
+        const renderParamList = (obj, idx) => {
+            const br = methodParamList.length === idx + 1 ? '' : <br />;
+            try {
                 return (
                     <>
-                        <span>{prefix}</span>
-                        <Form.Label
-                            onClick={(e) =>
-                                onClickMoveClazz(obj.elementClazzId)
-                            }
-                            style={{color: 'BLUE'}}
-                        >
-                            {`${obj.elementName}`}
-                        </Form.Label>
-                        <span>{afterFix}</span>
+                        {renderParamType(obj.methodParamTypeList, true)} &nbsp;
+                        <Form.Label>{` ${obj.name}`}</Form.Label>
+                        {br}
+                    </>
+                );
+            } catch (e) {
+                // 실패한 경우
+                return (
+                    <>
+                        <Form.Label>{`${obj.typeText} ${obj.name}`}</Form.Label>
+                        {br}
                     </>
                 );
             }
-
-            return (
-                <>
-                    <span>{prefix}</span>
-                    <Form.Label>{`${obj.elementName}`}</Form.Label>
-                    <span>{afterFix}</span>
-                </>
-            );
         };
 
         return (
             <>
-                {searchDetail &&
-                    searchDetail.data.methodReturnList.map((obj) =>
-                        renderTemp(
-                            obj,
-                            searchDetail.data.methodReturnList.length
-                        )
-                    )}
+                {methodParamList.map((obj, idx) => (
+                    <>{renderParamList(obj, idx)}</>
+                ))}
             </>
         );
-        // return <span>TEST</span>;
     };
 
     /*
-     * 주석은 존재하는 경우만 보여줍니다.
+     * 메서드 리턴 데이터 출력
      */
-    const renderComment = () => {
-        if (!searchDetail || searchDetail.data.comment === '') return '';
-        return (
-            <Row>
-                <Col xs="2" style={{textAlign: 'center'}}>
-                    <Form.Label>주석</Form.Label>
-                </Col>
-                <Col xs="10">
-                    <Form.Control
-                        disabled
-                        as="textarea"
-                        rows={5}
-                        value={searchDetail && searchDetail.data.comment}
-                    />
-                </Col>
-            </Row>
-        );
+    const renderReturnData = () => {
+        // no return data
+        if (!searchDetail || searchDetail.data.methodReturn === null) return '';
+
+        try {
+            const {methodReturn} = searchDetail.data;
+            const renderList = (methodReturnList) => {
+                if (methodReturnList.length < 1) return '';
+                const renderObject = (obj, idx, size) => {
+                    const comma = idx + 1 === size ? '' : ', ';
+                    if (obj.clazzId === 0) {
+                        return (
+                            <>
+                                <Form.Label>{`${obj.clazzName}`}</Form.Label>
+                                {renderList(obj.methodReturnList)}
+                                <Form.Label>{`${comma}`}</Form.Label>
+                            </>
+                        );
+                    }
+                    return (
+                        <>
+                            <Form.Label
+                                onClick={(e) => onClickMoveClazz(obj.clazzId)}
+                                style={{color: 'BLUE'}}
+                            >
+                                {`${obj.clazzName}`}
+                            </Form.Label>
+                            {renderList(obj.methodReturnList)}
+                            <Form.Label>{`${comma}`}</Form.Label>
+                        </>
+                    );
+                };
+
+                // methodReturnList list의 경우 ',' 으로 나누고
+                // 세부항목은 '<>'로 감싸는 작업이 필요합니다.
+                return (
+                    <>
+                        <Form.Label>{'<'}</Form.Label>
+                        {methodReturnList &&
+                            methodReturnList.map((obj, idx) =>
+                                renderObject(obj, idx, methodReturnList.length)
+                            )}
+                        <Form.Label>{'>'}</Form.Label>
+                    </>
+                );
+            };
+
+            if (methodReturn.clazzId === 0) {
+                return (
+                    <>
+                        <Form.Label>{`${methodReturn.clazzName}`}</Form.Label>
+                        {renderList(methodReturn.methodReturnList)}
+                    </>
+                );
+            }
+            return (
+                <>
+                    <Form.Label
+                        onClick={(e) => onClickMoveClazz(methodReturn.clazzId)}
+                        style={{color: 'BLUE'}}
+                    >
+                        {`${methodReturn.clazzName}${renderList(
+                            methodReturn.methodReturnList
+                        )}`}
+                    </Form.Label>
+                </>
+            );
+        } catch (e) {
+            return '';
+        }
     };
 
     return (
@@ -302,7 +346,8 @@ const MethodDetailInfo = () => {
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>파라매터</Form.Label>
                             </Col>
-                            <Col xs="5">
+                            <Col xs="5">{renderParamData()}</Col>
+                            {/* <Col xs="5">
                                 {searchDetail &&
                                     searchDetail.data.methodParamList.map(
                                         (obj, idx) => (
@@ -312,10 +357,9 @@ const MethodDetailInfo = () => {
                                             </>
                                         )
                                     )}
-                                {/* 
                                 <br />
-                                <Form.Label>파라매터</Form.Label> */}
-                            </Col>
+                                <Form.Label>파라매터</Form.Label>
+                            </Col> */}
                             <Col xs="2" style={{textAlign: 'center'}}>
                                 <Form.Label>생성일자</Form.Label>
                             </Col>
