@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
-import {FaSearch, FaTrash} from 'react-icons/fa';
 import {Form} from 'react-bootstrap';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
@@ -95,44 +94,6 @@ const ClazzDetailData = () => {
             title: '표현식',
             key: 'expression'
         }
-        // {
-        //     title: '리턴 타입',
-        //     key: 'returnType',
-        //     render: (id, row, column) => {
-        //         return <>주석의 일부를 조회해서 설명으로..</>;
-        //     }
-        // },
-
-        // {
-        //     title: '라인수',
-        //     key: 'line',
-        //     render: (id, row, column) => {
-        //         return (
-        //             <>
-        //                 <Button theme="link" onClick={() => onClickChange(row)}>
-        //                     {row.line} Line
-        //                 </Button>
-        //             </>
-        //         );
-        //     }
-        // {
-        //     title: '생성일자',
-        //     key: 'createDateTime'
-        // },
-        // {
-        //     title: '',
-        //     key: 'button',
-        //     // eslint-disable-next-line no-unused-vars
-        //     render: (id, row, column) => {
-        //         return (
-        //             <>
-        //                 <Button theme="link" onClick={() => onClickChange(row)}>
-        //                     <FaSearch />
-        //                 </Button>
-        //             </>
-        //         );
-        //     }
-        // }
     ];
 
     return (

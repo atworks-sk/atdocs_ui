@@ -9,6 +9,7 @@ import {toast} from 'react-toastify';
 // import {MethodDetailInfo} from '@pages/method-detail/components/MethodDetailInfo';
 import MethodDetailInfo from '@pages/method-detail/components/MethodDetailInfo';
 import MethodDetailClazz from '@pages/method-detail/components/MethodDetailClazz';
+import MethodDetailCall from '@pages/method-detail/components/MethodDetailCall';
 
 import Source from '@app/pages/common/popup/Source';
 import Comment from '@pages/common/popup/Comment';
@@ -50,6 +51,9 @@ const MethodDetail = () => {
                     </Col>
                     <Col xs="4">
                         <MethodDetailClazz />
+                    </Col>
+                    <Col xs="12">
+                        <MethodDetailCall />
                     </Col>
                 </Row>
             </Container>

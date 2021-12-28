@@ -100,10 +100,9 @@ const MethodDetailInfo = () => {
 
     const renderParamData = () => {
         // no return data
-        if (!searchDetail || searchDetail.data.methodParamList === null)
-            return '';
+        if (!searchDetail || searchDetail.data.paramList === null) return '';
 
-        const {methodParamList} = searchDetail.data;
+        const {paramList} = searchDetail.data;
 
         const renderParamType = (methodParamType, isFirst) => {
             const renderParamTypeList = (obj, idx) => {
@@ -185,7 +184,7 @@ const MethodDetailInfo = () => {
         };
 
         const renderParamList = (obj, idx) => {
-            const br = methodParamList.length === idx + 1 ? '' : <br />;
+            const br = paramList.length === idx + 1 ? '' : <br />;
             try {
                 return (
                     <>
@@ -207,7 +206,7 @@ const MethodDetailInfo = () => {
 
         return (
             <>
-                {methodParamList.map((obj, idx) => (
+                {paramList.map((obj, idx) => (
                     <>{renderParamList(obj, idx)}</>
                 ))}
             </>
