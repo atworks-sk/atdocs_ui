@@ -88,7 +88,7 @@ const ProjectSearch = () => {
                             <Row>
                                 <Col xs="3">
                                     <Form.Group>
-                                        <Form.Label>프로젝트 명</Form.Label>
+                                        <Form.Label>Project Name</Form.Label>
                                         <Form.Control
                                             type="text"
                                             placeholder="Project A"

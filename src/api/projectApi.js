@@ -3,6 +3,7 @@ import axios from 'axios';
 
 /*
  * project list 조회
+@GetMapping("/project-name-like/{projectName}")
  */
 export const searchProjectList = async ({
     projectName = '',
@@ -10,21 +11,25 @@ export const searchProjectList = async ({
     size = 10
 }) => {
     const response = await axios.get(
-        `/project/searchList?sort=id,asc&projectName=${projectName}&page=${
+        `/project/project-name-like?sort=id,asc&projectName=${projectName}&page=${
             page - 1
         }&size=${size}`
     );
     return response;
 };
 
+export const searchProjectDetail = async ({projectId = -1}) => {
+    const response = await axios.get(`/project/project-id/${projectId}`);
+    return response;
+};
+
 /*
  * project 등록/수정 API
  */
-export const saveProject = async ({id, projectName, packageName}) => {
-    const response = await axios.put('/project/save', {
+export const saveProject = async ({id, projectName}) => {
+    const response = await axios.put('/project', {
         id,
-        projectName,
-        packageName
+        projectName
     });
     return response;
 };

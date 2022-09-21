@@ -6,7 +6,7 @@ import {Table} from '@components';
 import {FaArrowRight} from 'react-icons/fa';
 import Button from '../../../components/button/Button';
 import {hideModalInheritance} from '../../../store/commonStore';
-import {searchClazzDetail} from '../../../store/clazzStore';
+import {searchClazz} from '../../../store/clazzStore';
 /*
 /*
  * [공통팝업] 자바 소스 출력하는 팝업
@@ -31,7 +31,7 @@ const Inheritance = () => {
     const onClickChange = (row) => {
         if (row.id !== 0) {
             handleClose();
-            dispatch(searchClazzDetail(row.id));
+            dispatch(searchClazz(row.id));
         }
     };
 

@@ -1,70 +1,57 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react';
 import {Container, Row, Col, Form, Modal} from 'react-bootstrap';
+import {useLocation} from 'react-router-dom';
 import {Button, Card, Spinner} from '@components';
 import {useDispatch, useSelector} from 'react-redux';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {toast} from 'react-toastify';
 import {
-    hideModalProjectUpdate,
-    saveProject,
-    saveProjectClear,
-    searchProjectList
-} from '../../../store/projectStore';
-import {getErrorMsg} from '../../../lib/commonUiUtils';
+    hideModalWorkSave,
+    saveWork,
+    saveWorkClear
+} from '../../../store/workStore';
+import {
+    getErrorMsg,
+    getInputValidMsg,
+    printFormError
+} from '../../../lib/commonUiUtils';
 /*
- * Project 검색조건 Contanier
+ * project 하위 work update modal
  */
-const ProjectUpdate = () => {
+const ProjectDetailWorkUpdate = ({searchWorksEvent}) => {
     const dispatch = useDispatch();
+    const location = useLocation();
 
-    // popup show-hide event
     const [modalShow, setModalShow] = React.useState(false);
-    const handleShow = () => setModalShow(true);
     const handleClose = () => {
-        dispatch(hideModalProjectUpdate());
+        dispatch(hideModalWorkSave());
         setModalShow(false);
     };
+    const handleShow = () => setModalShow(true);
 
-    const {projectUpdateModalInitData} = useSelector((state) => state.project);
+    const {workSaveModalInitData} = useSelector((state) => state.work);
 
     const {
         loading: saveLoading,
         data: saveData,
         error: saveError
-    } = useSelector((state) => state.project.saveProjectRes);
-
-    const {searchProjectListForm: searchForm} = useSelector(
-        (state) => state.project
-    );
-    const onSearchList = (_seachFrom = searchForm) => {
-        dispatch(searchProjectList(_seachFrom));
-    };
+    } = useSelector((state) => state.work.saveWorksRes);
 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            id:
-                projectUpdateModalInitData &&
-                projectUpdateModalInitData.initData.id,
-            projectName:
-                projectUpdateModalInitData &&
-                projectUpdateModalInitData.initData.projectName
-                    ? projectUpdateModalInitData.initData.projectName
-                    : '',
-            packageName:
-                projectUpdateModalInitData &&
-                projectUpdateModalInitData.initData.packageName
-                    ? projectUpdateModalInitData.initData.packageName
-                    : ''
+            id: -1
         },
         validationSchema: Yup.object({
-            // projectName: Yup.string().required(getInputValidMsg(''))
+            workName: Yup.string().required(getInputValidMsg(''))
             // url: Yup.string().required(getInputValidMsg('url'))
         }),
         onSubmit: (values) => {
-            dispatch(saveProject(values));
+            const data = {...values};
+            data.projectId = location.state.id;
+            dispatch(saveWork(data));
         }
     });
 
@@ -72,10 +59,30 @@ const ProjectUpdate = () => {
      * Popup open event
      */
     useEffect(() => {
-        if (projectUpdateModalInitData.showModal && !modalShow) {
+        if (workSaveModalInitData.showModal && !modalShow) {
+            formik.setFieldValue(
+                'packagePath',
+                workSaveModalInitData &&
+                    workSaveModalInitData.initData.packagePath
+                    ? workSaveModalInitData.initData.packagePath
+                    : ''
+            );
+            formik.setFieldValue(
+                'id',
+                workSaveModalInitData && workSaveModalInitData.initData.id
+                    ? workSaveModalInitData.initData.id
+                    : -1
+            );
+            formik.setFieldValue(
+                'workName',
+                workSaveModalInitData && workSaveModalInitData.initData.workName
+                    ? workSaveModalInitData.initData.workName
+                    : ''
+            );
+
             handleShow();
         }
-    }, [projectUpdateModalInitData.showModal]);
+    }, [workSaveModalInitData.showModal]);
 
     /*
      * 프로젝트 저자 성공/실패
@@ -83,12 +90,12 @@ const ProjectUpdate = () => {
     useEffect(() => {
         if (!saveLoading && saveData) {
             handleClose();
-            dispatch(saveProjectClear());
-            onSearchList();
+            dispatch(saveWorkClear());
+            searchWorksEvent();
         }
         if (!saveLoading && saveError) {
             toast.error(getErrorMsg(saveData, 'search'));
-            dispatch(saveProjectClear());
+            dispatch(saveWorkClear());
         }
     }, [saveData, saveError]);
 
@@ -106,8 +113,7 @@ const ProjectUpdate = () => {
                 <Form onSubmit={formik.handleSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            {/* {t('pages.scenario.registerCase')} */}
-                            프로젝트 저장
+                            Work Save
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -115,28 +121,28 @@ const ProjectUpdate = () => {
                             <Row>
                                 <Col xs="6">
                                     <Form.Group>
-                                        <Form.Label>* 프로젝트 명</Form.Label>
+                                        <Form.Label>* Work Name</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder="Project A.."
+                                            placeholder="Please enter work name"
                                             maxLength="40"
                                             // onChange={handleInputChange}
                                             {...formik.getFieldProps(
-                                                'projectName'
+                                                'workName'
                                             )}
                                         />
+                                        {printFormError(formik, 'workName')}
                                     </Form.Group>
                                 </Col>
                                 <Col xs="6">
                                     <Form.Group>
-                                        <Form.Label>패키지 명</Form.Label>
+                                        <Form.Label>Package Name</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder="com.skcc.atdocs.."
-                                            maxLength="40"
-                                            // onChange={handleInputChange}
+                                            placeholder="Please enter package name"
+                                            maxLength="100"
                                             {...formik.getFieldProps(
-                                                'packageName'
+                                                'packagePath'
                                             )}
                                         />
                                     </Form.Group>
@@ -148,12 +154,12 @@ const ProjectUpdate = () => {
                         <Button
                             theme="primary"
                             type="submit"
-                            // isLoading={updateLoading}
+                            isLoading={saveLoading}
                         >
-                            저장
+                            Save
                         </Button>
                         <Button theme="default" onClick={handleClose}>
-                            닫기
+                            Close
                         </Button>
                     </Modal.Footer>
                 </Form>
@@ -162,4 +168,4 @@ const ProjectUpdate = () => {
     );
 };
 
-export default ProjectUpdate;
+export default ProjectDetailWorkUpdate;

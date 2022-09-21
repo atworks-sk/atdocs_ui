@@ -1,6 +1,18 @@
 import React from 'react';
 import {NavLink, Link} from 'react-router-dom';
 
+// eslint-disable-next-line no-unused-vars
+const renderClassName = (key) => {
+    if (window.location.pathname === key) {
+        return 'nav-link active';
+    }
+
+    console.log(window.location.pathname);
+    if (window.location.pathname === '/project-detail') {
+        return 'nav-link active';
+    }
+    return 'nav-link';
+};
 const MenuSidebar = () => {
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -28,8 +40,12 @@ const MenuSidebar = () => {
                                 <p>메인</p>
                             </NavLink>
                         </li>
-                        <li key="server" className="nav-item">
-                            <NavLink to="/project" exact className="nav-link">
+                        <li key="project" className="nav-item">
+                            <NavLink
+                                to="/project"
+                                exact
+                                className={renderClassName('/project')}
+                            >
                                 <i className="nav-icon fas fa-book" />
                                 <p>프로젝트</p>
                             </NavLink>
@@ -40,7 +56,7 @@ const MenuSidebar = () => {
                                 <p>스냅샷</p>
                             </NavLink>
                         </li>
-                        <li key="snapshot" className="nav-item">
+                        <li key="clazz" className="nav-item">
                             <NavLink to="/clazz" exact className="nav-link">
                                 <i className="nav-icon fas fa-file" />
                                 <p>클래스</p>

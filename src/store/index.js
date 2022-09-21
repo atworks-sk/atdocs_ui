@@ -2,9 +2,13 @@
 import {combineReducers} from 'redux';
 import {all} from 'redux-saga/effects';
 import commonUI from './commonUi'; // 다른 store보다 위에 있어야함.
+
+import project, {projectSaga} from './projectStore';
+import work, {workSaga} from './workStore';
+import source, {sourceSaga} from './sourceStore';
+
 import dashboard, {dashboardSaga} from './dashboard';
 import common, {commonSaga} from './commonStore';
-import project, {projectSaga} from './projectStore';
 import clazz, {clazzSaga} from './clazzStore';
 import method, {methodSaga} from './methodStore';
 import snapshot, {snapshotSaga} from './snapshotStore';
@@ -12,8 +16,11 @@ import rest, {restSaga} from './restStore';
 
 const rootReducer = combineReducers({
     commonUI,
-    common,
     project,
+    work,
+    source,
+    common,
+
     dashboard,
     clazz,
     method,
@@ -22,9 +29,13 @@ const rootReducer = combineReducers({
 });
 export function* rootSaga() {
     yield all([
+        projectSaga(),
+        workSaga(),
+        sourceSaga(),
+
         commonSaga(),
         dashboardSaga(),
-        projectSaga(),
+
         clazzSaga(),
         methodSaga(),
         snapshotSaga(),

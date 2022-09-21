@@ -66,22 +66,6 @@ export const deleteSnapshotClear = () => ({
 });
 
 /*
- * SNAPSHOT 등록 팝업
- * SHOW : showModalSnapshotUpdate (SHOW_MODAL_SNAPSHOT_UPDATE)
- * HIDE : hideModalSnapshotUpdate (HIDE_MODAL_SNAPSHOT_UPDATE)
- */
-const SHOW_MODAL_SNAPSHOT_UPDATE = `${PREFIX}/SHOW_MODAL_SNAPSHOT_UPDATE`; // SNAPSHOT 등록 팝업 호출
-const HIDE_MODAL_SNAPSHOT_UPDATE = `${PREFIX}/HIDE_MODAL_SNAPSHOT_UPDATE`; // SNAPSHOT 등록 팝업 호출
-
-export const showModalSnapshotUpdate = () => ({
-    type: SHOW_MODAL_SNAPSHOT_UPDATE
-});
-
-export const hideModalSnapshotUpdate = () => ({
-    type: HIDE_MODAL_SNAPSHOT_UPDATE
-});
-
-/*
  * snapshot 등록/수정작업
  * snapshot 수정  : createSnapshot (CREATE_SNAPSHOT)
  * snapshot 수정 초기화 : createSnapshotClear (CREATE_SNAPSHOT_CLEAR)
@@ -124,12 +108,7 @@ const initialState = {
     searchSnapshotListForm: searchSnapshotListFormInitData(),
     searchSnapshotListRes: reducerUtils.initial(),
     deleteSnapshotRes: reducerUtils.initial(),
-    createSnapshotRes: reducerUtils.initial(),
-    // 프로젝트 등록/수정 팝업 호출
-    snapshotUpdateModalInitData: {
-        showModal: false,
-        initData: {}
-    }
+    createSnapshotRes: reducerUtils.initial()
 };
 
 export default function bulktest(state = initialState, action) {
@@ -170,21 +149,6 @@ export default function bulktest(state = initialState, action) {
                 deleteSnapshotRes: reducerUtils.initial()
             };
 
-        // snapshot 등록/수정 팝업 호출
-        case SHOW_MODAL_SNAPSHOT_UPDATE:
-            return {
-                ...state,
-                snapshotUpdateModalInitData: {
-                    showModal: true
-                }
-            };
-        case HIDE_MODAL_SNAPSHOT_UPDATE:
-            return {
-                ...state,
-                snapshotUpdateModalInitData: {
-                    showModal: false
-                }
-            };
         // snapshot 수정
         case CREATE_SNAPSHOT:
         case CREATE_SNAPSHOT_SUCCESS:

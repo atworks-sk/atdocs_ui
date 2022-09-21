@@ -6,7 +6,7 @@ import {Card} from '@components';
 import {Button, Row, Col, Form, InputGroup} from 'react-bootstrap';
 // import ClazzSearch from '@pages/clazz/components/ClazzSearch';
 // import ClazzTable from '@pages/clazz/components/ClazzTable';
-// import {searchClazzDetail} from '../../store/clazzStore';
+// import {searchClazz} from '../../store/clazzStore';
 /*
  * Clazz 조회/등록/수정 화면
  */
@@ -16,7 +16,7 @@ const ClazzDetailFile = () => {
     const location = useLocation();
 
     const {data: searchDetail} = useSelector(
-        (state) => state.clazz.searchClazzDetailRes
+        (state) => state.clazz.searchClazzRes
     );
 
     const renderAnnotation = () => {

@@ -7,7 +7,6 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {toast} from 'react-toastify';
 import {
-    hideModalSnapshotUpdate,
     createSnapshot,
     createSnapshotClear,
     searchSnapshotList
@@ -25,7 +24,6 @@ const SnapshotCreate = () => {
     const dispatch = useDispatch();
     const [modalShow, setModalShow] = React.useState(false);
     const handleClose = () => {
-        dispatch(hideModalSnapshotUpdate());
         setModalShow(false);
     };
     const handleShow = () => setModalShow(true);
@@ -70,11 +68,11 @@ const SnapshotCreate = () => {
     /*
      * Popup open event
      */
-    useEffect(() => {
-        if (snapshotUpdateModalInitData.showModal && !modalShow) {
-            handleShow();
-        }
-    }, [snapshotUpdateModalInitData.showModal]);
+    // useEffect(() => {
+    //     if (snapshotUpdateModalInitData.showModal && !modalShow) {
+    //         handleShow();
+    //     }
+    // }, [snapshotUpdateModalInitData.showModal]);
 
     /*
      * 프로젝트 저자 성공/실패

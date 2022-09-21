@@ -19,10 +19,7 @@ import Inheritance from '@pages/common/popup/Inheritance';
 
 import {toast} from 'react-toastify';
 import {getErrorMsg} from '../../lib/commonUiUtils';
-import {
-    searchClazzDetail,
-    searchClazzDetailClear
-} from '../../store/clazzStore';
+import {searchClazz, searchClazzClear} from '../../store/clazzStore';
 
 /*
  * Clazz 조회/등록/수정 화면
@@ -36,14 +33,14 @@ const ClazzDetail = () => {
         loading: searchLoading,
         data: searchDetail,
         error: searchError
-    } = useSelector((state) => state.clazz.searchClazzDetailRes);
+    } = useSelector((state) => state.clazz.searchClazzRes);
 
     const [tabKey, setTabKey] = useState('T1');
 
     useEffect(() => {
         if (location.state != null) {
-            dispatch(searchClazzDetailClear());
-            dispatch(searchClazzDetail(location.state.id));
+            dispatch(searchClazzClear());
+            dispatch(searchClazz(location.state.id));
         } else {
             // alert('TEST');
         }
@@ -55,7 +52,7 @@ const ClazzDetail = () => {
     useEffect(() => {
         if (!searchLoading && searchError) {
             toast.error(getErrorMsg(searchError, 'search'));
-            dispatch(searchClazzDetailClear());
+            dispatch(searchClazzClear());
         }
 
         if (!searchLoading && searchDetail) {
@@ -79,7 +76,7 @@ const ClazzDetail = () => {
                     <Col xs="8">
                         <ClazzDetailInfo />
                     </Col>
-                    <Col xs="4">
+                    {/* <Col xs="4">
                         <ClazzDetailFile />
                     </Col>
 
@@ -112,7 +109,7 @@ const ClazzDetail = () => {
                                 searchDetail && searchDetail.data.importedClass
                             }
                         />
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
             <Annotation />

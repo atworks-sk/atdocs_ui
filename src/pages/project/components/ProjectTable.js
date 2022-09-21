@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import {FaSearch, FaTrash} from 'react-icons/fa';
 import {Button, Spinner, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {
     searchProjectList,
@@ -16,6 +17,7 @@ import {getErrorMsg} from '../../../lib/commonUiUtils';
  * Project 검색조건 Contanier
  */
 const ProjectTable = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const {data: searchList} = useSelector(
@@ -39,8 +41,12 @@ const ProjectTable = () => {
     };
 
     const onClickChange = (row) => {
-        const initData = row;
-        dispatch(showModalProjectUpdate(initData));
+        history.push({
+            pathname: '/project-detail',
+            state: {
+                id: row.id
+            }
+        });
     };
 
     const onClickDelete = (row) => {
@@ -67,17 +73,6 @@ const ProjectTable = () => {
             key: 'projectName'
         },
         {
-            title: '패키지 명',
-            key: 'packageName'
-        },
-        {
-            title: '스냅샷건수',
-            key: 'snapshotCnt',
-            render: (id, row, column) => {
-                return `${row.snapshotCnt} 건`;
-            }
-        },
-        {
             title: '생성일자',
             key: 'createDate'
         },
@@ -88,14 +83,21 @@ const ProjectTable = () => {
         {
             title: '',
             key: 'button',
+            width: '8%',
             // eslint-disable-next-line no-unused-vars
             render: (id, row, column) => {
                 return (
                     <>
-                        <Button theme="link" onClick={() => onClickChange(row)}>
+                        <Button
+                            theme="outline-success"
+                            onClick={() => onClickChange(row)}
+                        >
                             <FaSearch />
                         </Button>
-                        <Button theme="link" onClick={() => onClickDelete(row)}>
+                        <Button
+                            theme="outline-danger"
+                            onClick={() => onClickDelete(row)}
+                        >
                             <FaTrash />
                         </Button>
                     </>

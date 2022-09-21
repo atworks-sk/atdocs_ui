@@ -13,34 +13,34 @@ const PREFIX = 'CLAZZ';
 
 /*
  * CLAZZ 리스트 조회
- * 리스트 조회 : searchClazzList (SEARCH_CLAZZ_LIST)
- * 리스트 초기화 : searchClazzListClear (SEARCH_CLAZZ_LIST_CLEAR)
- * Form 데이터 설정 : searchClazzListSetForm (SEARCH_CLAZZ_LIST_SET_FORM)
- * Form 초기값 조회 : searchClazzListFormInitData
+ * 리스트 조회 : searchClazzes (SEARCH_CLAZZ_LIST)
+ * 리스트 초기화 : searchClazzesClear (SEARCH_CLAZZES_CLEAR)
+ * Form 데이터 설정 : searchClazzesSetForm (SEARCH_CLAZZES_SET_FORM)
+ * Form 초기값 조회 : searchClazzesFormInitData
  */
-const SEARCH_CLAZZ_LIST = `${PREFIX}/SEARCH_CLAZZ_LIST`; // 요청 시작
-const SEARCH_CLAZZ_LIST_SUCCESS = `${PREFIX}/SEARCH_CLAZZ_LIST_SUCCESS`; // 요청 성공
-const SEARCH_CLAZZ_LIST_ERROR = `${PREFIX}/SEARCH_CLAZZ_LIST_ERROR`; // 요청 실패
-const SEARCH_CLAZZ_LIST_CLEAR = `${PREFIX}/SEARCH_CLAZZ_LIST_CLEAR`; // 조회 결과 초기화
-const SEARCH_CLAZZ_LIST_SET_FORM = `${PREFIX}/SEARCH_CLAZZ_LIST_SET_FORM`;
+const SEARCH_CLAZZES = `${PREFIX}/SEARCH_CLAZZES`; // 요청 시작
+const SEARCH_CLAZZES_SUCCESS = `${PREFIX}/SEARCH_CLAZZES_SUCCESS`; // 요청 성공
+const SEARCH_CLAZZES_ERROR = `${PREFIX}/SEARCH_CLAZZES_ERROR`; // 요청 실패
+const SEARCH_CLAZZES_CLEAR = `${PREFIX}/SEARCH_CLAZZES_CLEAR`; // 조회 결과 초기화
+const SEARCH_CLAZZES_SET_FORM = `${PREFIX}/SEARCH_CLAZZES_SET_FORM`;
 
-export const searchClazzList = (searchForm) => ({
-    type: SEARCH_CLAZZ_LIST,
+export const searchClazzes = (searchForm) => ({
+    type: SEARCH_CLAZZES,
     payload: searchForm
 });
-export const searchClazzListClear = () => ({
-    type: SEARCH_CLAZZ_LIST_CLEAR
+export const searchClazzesClear = () => ({
+    type: SEARCH_CLAZZES_CLEAR
 });
-export const searchClazzListSetForm = (searchClazzListForm) => ({
-    type: SEARCH_CLAZZ_LIST_SET_FORM,
+export const searchClazzesSetForm = (searchClazzesForm) => ({
+    type: SEARCH_CLAZZES_SET_FORM,
     payload: {
-        searchClazzListForm
+        searchClazzesForm
     }
 });
-export const searchClazzListFormInitData = () => {
+export const searchClazzesFormInitData = () => {
     return {
         clazzName: '',
-        projectId: '',
+        projectId: -1,
         page: 1,
         size: 10
     };
@@ -48,23 +48,23 @@ export const searchClazzListFormInitData = () => {
 
 /*
  * CLAZZ 상세조회
- * 상세 조회 : searchClazzDetail (SEARCH_CLAZZ_DETAIL)
- * 상세 조회 초기화 : searchClazzDetailClear (SEARCH_CLAZZ_DETAIL_CLEAR)
+ * 상세 조회 : searchClazz (SEARCH_CLAZZ)
+ * 상세 조회 초기화 : searchClazzClear (SEARCH_CLAZZ_CLEAR)
  */
-const SEARCH_CLAZZ_DETAIL = `${PREFIX}/SEARCH_CLAZZ_DETAIL`; // 요청 시작
-const SEARCH_CLAZZ_DETAIL_SUCCESS = `${PREFIX}/SEARCH_CLAZZ_DETAIL_SUCCESS`; // 요청 성공
-const SEARCH_CLAZZ_DETAIL_ERROR = `${PREFIX}/SEARCH_CLAZZ_DETAIL_ERROR`; // 요청 실패
-const SEARCH_CLAZZ_DETAIL_CLEAR = `${PREFIX}/SEARCH_CLAZZ_DETAIL_CLEAR`; // 조회 결과 초기화
+const SEARCH_CLAZZ = `${PREFIX}/SEARCH_CLAZZ`; // 요청 시작
+const SEARCH_CLAZZ_SUCCESS = `${PREFIX}/SEARCH_CLAZZ_SUCCESS`; // 요청 성공
+const SEARCH_CLAZZ_ERROR = `${PREFIX}/SEARCH_CLAZZ_ERROR`; // 요청 실패
+const SEARCH_CLAZZ_CLEAR = `${PREFIX}/SEARCH_CLAZZ_CLEAR`; // 조회 결과 초기화
 
-export const searchClazzDetail = (id) => ({
-    type: SEARCH_CLAZZ_DETAIL,
+export const searchClazz = (id) => ({
+    type: SEARCH_CLAZZ,
     payload: {
         id
     }
 });
 
-export const searchClazzDetailClear = () => ({
-    type: SEARCH_CLAZZ_DETAIL_CLEAR
+export const searchClazzClear = () => ({
+    type: SEARCH_CLAZZ_CLEAR
 });
 
 /*
@@ -72,57 +72,57 @@ export const searchClazzDetailClear = () => ({
  */
 export function* clazzSaga() {
     yield takeLatest(
-        SEARCH_CLAZZ_LIST,
-        createPromiseSaga(SEARCH_CLAZZ_LIST, clazzApi.searchClazzList)
+        SEARCH_CLAZZES,
+        createPromiseSaga(SEARCH_CLAZZES, clazzApi.searchClazzes)
     );
     yield takeLatest(
-        SEARCH_CLAZZ_DETAIL,
-        createPromiseSaga(SEARCH_CLAZZ_DETAIL, clazzApi.searchClazzDetail)
+        SEARCH_CLAZZ,
+        createPromiseSaga(SEARCH_CLAZZ, clazzApi.searchClazz)
     );
 }
 
 // initialState 쪽도 반복되는 코드를 initial() 함수를 사용해서 리팩토링 했습니다.
 const initialState = {
-    searchClazzListForm: searchClazzListFormInitData(),
-    searchClazzListRes: reducerUtils.initial(),
-    searchClazzDetailRes: reducerUtils.initial()
+    searchClazzesForm: searchClazzesFormInitData(),
+    searchClazzesRes: reducerUtils.initial(),
+    searchClazzRes: reducerUtils.initial()
 };
 
 export default function bulktest(state = initialState, action) {
     switch (action.type) {
         // dashboard Same-day test results
-        case SEARCH_CLAZZ_LIST:
-        case SEARCH_CLAZZ_LIST_SUCCESS:
-        case SEARCH_CLAZZ_LIST_ERROR:
+        case SEARCH_CLAZZES:
+        case SEARCH_CLAZZES_SUCCESS:
+        case SEARCH_CLAZZES_ERROR:
             return handleAsyncActions(
-                SEARCH_CLAZZ_LIST,
-                'searchClazzListRes',
+                SEARCH_CLAZZES,
+                'searchClazzesRes',
                 true
             )(state, action);
-        case SEARCH_CLAZZ_LIST_CLEAR:
+        case SEARCH_CLAZZES_CLEAR:
             return {
                 ...state,
-                searchClazzListRes: reducerUtils.initial()
+                searchClazzesRes: reducerUtils.initial()
             };
-        case SEARCH_CLAZZ_LIST_SET_FORM:
+        case SEARCH_CLAZZES_SET_FORM:
             return {
                 ...state,
-                searchClazzListForm: action.payload.searchClazzListForm
+                searchClazzesForm: action.payload.searchClazzesForm
             };
 
-        case SEARCH_CLAZZ_DETAIL:
-        case SEARCH_CLAZZ_DETAIL_SUCCESS:
-        case SEARCH_CLAZZ_DETAIL_ERROR:
+        case SEARCH_CLAZZ:
+        case SEARCH_CLAZZ_SUCCESS:
+        case SEARCH_CLAZZ_ERROR:
             return handleAsyncActions(
-                SEARCH_CLAZZ_DETAIL,
-                'searchClazzDetailRes',
+                SEARCH_CLAZZ,
+                'searchClazzRes',
                 true
             )(state, action);
 
-        case SEARCH_CLAZZ_DETAIL_CLEAR:
+        case SEARCH_CLAZZ_CLEAR:
             return {
                 ...state,
-                searchClazzDetailRes: reducerUtils.initial()
+                searchClazzRes: reducerUtils.initial()
             };
         default:
             return state;

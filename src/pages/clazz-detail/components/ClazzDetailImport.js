@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom';
 import {Button, Table} from '@components';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {searchClazzDetail} from '../../../store/clazzStore';
+import {searchClazz} from '../../../store/clazzStore';
 /*
  * Project 검색조건 Contanier
  */
@@ -14,7 +14,7 @@ const ClazzDetailImport = ({cardName, data}) => {
     const history = useHistory();
 
     const onClickChange = (row) => {
-        if (row.id !== 0) dispatch(searchClazzDetail(row.id));
+        if (row.id !== 0) dispatch(searchClazz(row.id));
     };
 
     const renderTableData = () => {

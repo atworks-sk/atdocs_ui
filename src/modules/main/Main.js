@@ -10,6 +10,7 @@ import MethodDetail from '@pages/method-detail/MethodDetail';
 import Snapshot from '@pages/snapshot/Snapshot';
 import Rest from '@app/pages/Rest/Rest';
 
+import ProjectDetail from '@app/pages/project-detail/ProjectDetail';
 import MenuSidebar from '@modules/main/menu-sidebar/MenuSidebar';
 import Header from './header/Header';
 import Footer from './footer/Footer';
@@ -65,6 +66,13 @@ const Main = () => {
                         <Switch>
                             <Route exact path="/" component={DashBoard} />
                             <Route exact path="/project" component={Project} />
+
+                            <Route
+                                exact
+                                path="/project-detail"
+                                component={ProjectDetail}
+                            />
+
                             <Route exact path="/clazz" component={Clazz} />
                             <Route
                                 exact

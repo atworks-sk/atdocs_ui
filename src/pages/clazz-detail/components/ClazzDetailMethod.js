@@ -16,7 +16,7 @@ const ClazzDetailMethod = () => {
     const history = useHistory();
 
     const {data: searchDetail} = useSelector(
-        (state) => state.clazz.searchClazzDetailRes
+        (state) => state.clazz.searchClazzRes
     );
 
     /*

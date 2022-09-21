@@ -7,16 +7,13 @@ import SnapshotSearch from '@pages/snapshot/components/SnapshotSearch';
 import SnapshotTable from '@pages/snapshot/components/SnapshotTable';
 import SnapshotCreate from '@pages/snapshot/popup/SnapshotCreate';
 
-import {showModalSnapshotUpdate} from '../../store/snapshotStore';
 /*
  * Method 조회/등록/수정 화면
  */
 const Snapshot = () => {
     const dispatch = useDispatch();
     // 신규 스냅샷 등록
-    const onClickNewSnapsho = () => {
-        dispatch(showModalSnapshotUpdate());
-    };
+    const onClickNewSnapsho = () => {};
     return (
         <>
             <SnapshotCreate />

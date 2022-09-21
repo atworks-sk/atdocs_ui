@@ -19,7 +19,7 @@ const ClazzDetailInfo = () => {
     const location = useLocation();
 
     const {data: searchDetail} = useSelector(
-        (state) => state.clazz.searchClazzDetailRes
+        (state) => state.clazz.searchClazzRes
     );
 
     /*
@@ -61,12 +61,15 @@ const ClazzDetailInfo = () => {
             dispatch(showModalInheritance(initData));
         };
 
-        const disalbedAnnotaion =
-            searchDetail.data.clazzAnnotationList.length > 0;
+        // const disalbedAnnotaion =
+        //     searchDetail.data.clazzAnnotationList ||
+        //     searchDetail.data.clazzAnnotationList.length > 0;
 
-        const disalbedInheritance =
-            searchDetail.data.inheritanceList.length > 0 ||
-            searchDetail.data.inheritedList.length > 0;
+        // const disalbedInheritance =
+        //     searchDetail.data.inheritanceList ||
+        //     searchDetail.data.inheritedList ||
+        //     searchDetail.data.inheritanceList.length > 0 ||
+        //     searchDetail.data.inheritedList.length > 0;
 
         const disalbedComment = searchDetail.data.comment !== '';
         // renderInheritance
@@ -75,7 +78,7 @@ const ClazzDetailInfo = () => {
                 &nbsp;&nbsp;
                 <Button
                     theme="primary"
-                    disabled={!disalbedAnnotaion}
+                    // disabled={!disalbedAnnotaion}
                     onClick={onClickAnnotaion}
                     style={{width: '120px'}}
                 >
@@ -84,7 +87,7 @@ const ClazzDetailInfo = () => {
                 &nbsp;&nbsp;
                 <Button
                     theme="success"
-                    disabled={!disalbedInheritance}
+                    // disabled={!disalbedInheritance}
                     onClick={onClickInheritance}
                     style={{width: '120px'}}
                 >

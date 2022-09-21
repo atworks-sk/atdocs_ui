@@ -9,6 +9,10 @@ const ContentHeader = ({title}) => {
     const homeText = t('common.menu.home');
     const links = {
         project: [{id: 0, text: homeText, link: '/'}],
+        projectDetail: [
+            {id: 0, text: homeText, link: '/'},
+            {id: 0, text: t('common.menuDesc.project'), link: '/project'}
+        ],
         clazz: [{id: 0, text: homeText, link: '/'}],
         clazzDetail: [
             {id: 0, text: homeText, link: '/'},

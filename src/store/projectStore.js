@@ -46,6 +46,24 @@ export const searchProjectListFormInitData = () => {
 };
 
 /*
+ * 프로젝트 상세 조회
+ * 조회 : searchProjectList (SEARCH_PROJECT_DETAIL)
+ * 초기화 : searchProjectDetailClear (SEARCH_PROJECT_DETAIL_CLEAR)
+ */
+const SEARCH_PROJECT_DETAIL = `${PREFIX}/SEARCH_PROJECT_DETAIL`; // 요청 시작
+const SEARCH_PROJECT_DETAIL_SUCCESS = `${PREFIX}/SEARCH_PROJECT_DETAIL_SUCCESS`; // 요청 성공
+const SEARCH_PROJECT_DETAIL_ERROR = `${PREFIX}/SEARCH_PROJECT_DETAIL_ERROR`; // 요청 실패
+const SEARCH_PROJECT_DETAIL_CLEAR = `${PREFIX}/SEARCH_PROJECT_DETAIL_CLEAR`; // 조회 결과 초기화
+
+export const searchProjectDetail = (projectId) => ({
+    type: SEARCH_PROJECT_DETAIL,
+    payload: {projectId}
+});
+export const searchProjectDetailClear = () => ({
+    type: SEARCH_PROJECT_DETAIL_CLEAR
+});
+
+/*
  * 프로젝트 등록/수정 팝업
  * SHOW : showModalProjectUpdate (SHOW_MODAL_PROJECT_UPDATE)
  * HIDE : hideModalProjectUpdate (HIDE_MODAL_PROJECT_UPDATE)
@@ -53,31 +71,6 @@ export const searchProjectListFormInitData = () => {
 const SHOW_MODAL_PROJECT_UPDATE = `${PREFIX}/SHOW_MODAL_PROJECT_UPDATE`; // 프로젝트 등록/수정 팝업 호출
 const HIDE_MODAL_PROJECT_UPDATE = `${PREFIX}/HIDE_MODAL_PROJECT_UPDATE`; // 프로젝트 등록/수정 팝업 호출
 
-/*
- * 프로젝트 수정 프로세스
- * 프로젝트 수정  : saveProject (SAVE_PROJECT)
- * 프로젝트 수정 초기화 : saveProjectClear (SAVE_PROJECT_CLEAR)
- */
-const SAVE_PROJECT = `${PREFIX}/SAVE_PROJECT`; // 요청 시작
-const SAVE_PROJECT_SUCCESS = `${PREFIX}/SAVE_PROJECT_SUCCESS`; // 요청 성공
-const SAVE_PROJECT_ERROR = `${PREFIX}/SAVE_PROJECT_ERROR`; // 요청 실패
-const SAVE_PROJECT_CLEAR = `${PREFIX}/SAVE_PROJECT_CLEAR`; // 조회 결과 초기화
-
-/*
- * 프로젝트 삭제 프로세스
- * 프로젝트 삭제  : deleteProject (DELETE_PROJECT)
- * 프로젝트 삭제 초기화 : deleteProjectClear (DELETE_PROJECT_CLEAR)
- */
-const DELETE_PROJECT = `${PREFIX}/DELETE_PROJECT`; // 요청 시작
-const DELETE_PROJECT_SUCCESS = `${PREFIX}/DELETE_PROJECT_SUCCESS`; // 요청 성공
-const DELETE_PROJECT_ERROR = `${PREFIX}/DELETE_PROJECT_ERROR`; // 요청 실패
-const DELETE_PROJECT_CLEAR = `${PREFIX}/DELETE_PROJECT_CLEAR`; // 조회 결과 초기화
-
-/*
- * 프로젝트 등록/수정 팝업
- * SHOW : showModalProjectUpdate (SHOW_MODAL_PROJECT_UPDATE)
- * HIDE : hideModalProjectUpdate (HIDE_MODAL_PROJECT_UPDATE)
- */
 export const showModalProjectUpdate = (initData) => ({
     type: SHOW_MODAL_PROJECT_UPDATE,
     payload: {
@@ -90,10 +83,15 @@ export const hideModalProjectUpdate = () => ({
 });
 
 /*
- * 프로젝트 등록/수정작업
+ * 프로젝트 수정 프로세스
  * 프로젝트 수정  : saveProject (SAVE_PROJECT)
  * 프로젝트 수정 초기화 : saveProjectClear (SAVE_PROJECT_CLEAR)
  */
+const SAVE_PROJECT = `${PREFIX}/SAVE_PROJECT`; // 요청 시작
+const SAVE_PROJECT_SUCCESS = `${PREFIX}/SAVE_PROJECT_SUCCESS`; // 요청 성공
+const SAVE_PROJECT_ERROR = `${PREFIX}/SAVE_PROJECT_ERROR`; // 요청 실패
+const SAVE_PROJECT_CLEAR = `${PREFIX}/SAVE_PROJECT_CLEAR`; // 조회 결과 초기화
+
 export const saveProject = (saveData) => ({
     type: SAVE_PROJECT,
     payload: {
@@ -107,9 +105,14 @@ export const saveProjectClear = () => ({
 
 /*
  * 프로젝트 삭제 프로세스
- * 프로젝트 삭제  : deleteProject (SAVE_PROJECT)
+ * 프로젝트 삭제  : deleteProject (DELETE_PROJECT)
  * 프로젝트 삭제 초기화 : deleteProjectClear (DELETE_PROJECT_CLEAR)
  */
+const DELETE_PROJECT = `${PREFIX}/DELETE_PROJECT`; // 요청 시작
+const DELETE_PROJECT_SUCCESS = `${PREFIX}/DELETE_PROJECT_SUCCESS`; // 요청 성공
+const DELETE_PROJECT_ERROR = `${PREFIX}/DELETE_PROJECT_ERROR`; // 요청 실패
+const DELETE_PROJECT_CLEAR = `${PREFIX}/DELETE_PROJECT_CLEAR`; // 조회 결과 초기화
+
 export const deleteProject = (id) => ({
     type: DELETE_PROJECT,
     payload: {
@@ -129,6 +132,11 @@ export function* projectSaga() {
         createPromiseSaga(SEARCH_PROJECT_LIST, projectApi.searchProjectList)
     );
     yield takeEvery(
+        SEARCH_PROJECT_DETAIL,
+        createPromiseSaga(SEARCH_PROJECT_DETAIL, projectApi.searchProjectDetail)
+    );
+
+    yield takeEvery(
         SAVE_PROJECT,
         createPromiseSaga(SAVE_PROJECT, projectApi.saveProject)
     );
@@ -142,6 +150,7 @@ export function* projectSaga() {
 const initialState = {
     searchProjectListForm: searchProjectListFormInitData(),
     searchProjectListRes: reducerUtils.initial(),
+    searchProjectDetailRes: reducerUtils.initial(),
     // 프로젝트 등록/수정 팝업 호출
     projectUpdateModalInitData: {
         showModal: false,
@@ -171,6 +180,21 @@ export default function bulktest(state = initialState, action) {
             return {
                 ...state,
                 searchProjectListForm: action.payload.searchProjectListForm
+            };
+
+        case SEARCH_PROJECT_DETAIL:
+        case SEARCH_PROJECT_DETAIL_SUCCESS:
+        case SEARCH_PROJECT_DETAIL_ERROR:
+            return handleAsyncActions(
+                SEARCH_PROJECT_DETAIL,
+                'searchProjectDetailRes',
+                true
+            )(state, action);
+
+        case SEARCH_PROJECT_DETAIL_CLEAR:
+            return {
+                ...state,
+                searchProjectDetailRes: reducerUtils.initial()
             };
 
         // 프로젝트 등록/수정 팝업 호출

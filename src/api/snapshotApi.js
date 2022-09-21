@@ -20,11 +20,8 @@ export const searchSnapshotList = async ({
 /*
  * Snapshot 추가 (비동기 방식)
  */
-export const createSnapshot = async ({projectId, dirPath}) => {
-    const response = await axios.post('/snapshot/create', {
-        projectId,
-        dirPath
-    });
+export const createSnapshot = async ({projectId}) => {
+    const response = await axios.post(`/snapshot/analysis/${projectId}`, {});
     return response;
 };
 

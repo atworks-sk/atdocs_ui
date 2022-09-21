@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {Form} from 'react-bootstrap';
 import {Button, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
-import {searchClazzDetail} from '../../../store/clazzStore';
+import {searchClazz} from '../../../store/clazzStore';
 
 /*
  * Project 검색조건 Contanier
@@ -16,7 +16,7 @@ const MethodDetailCall = () => {
     );
 
     const onClickChange = (id) => {
-        dispatch(searchClazzDetail(id));
+        dispatch(searchClazz(id));
     };
 
     const renderTableData = () => {

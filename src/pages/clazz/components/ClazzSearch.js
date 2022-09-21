@@ -6,10 +6,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {
-    searchClazzList,
-    searchClazzListClear,
-    searchClazzListFormInitData,
-    searchClazzListSetForm
+    searchClazzes,
+    searchClazzesClear,
+    searchClazzesFormInitData,
+    searchClazzesSetForm
 } from '../../../store/clazzStore';
 import {getErrorMsg} from '../../../lib/commonUiUtils';
 
@@ -20,11 +20,9 @@ const ClazzSearch = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const {searchClazzListForm: searchForm} = useSelector(
-        (state) => state.clazz
-    );
+    const {searchClazzesForm: searchForm} = useSelector((state) => state.clazz);
     const {loading: searchLoading, error: searchError} = useSelector(
-        (state) => state.clazz.searchClazzListRes
+        (state) => state.clazz.searchClazzesRes
     );
 
     const {data: projectList} = useSelector(
@@ -32,7 +30,7 @@ const ClazzSearch = () => {
     );
 
     const onSearchList = (_seachFrom = searchForm) => {
-        dispatch(searchClazzList(_seachFrom));
+        dispatch(searchClazzes(_seachFrom));
     };
 
     /*
@@ -42,7 +40,7 @@ const ClazzSearch = () => {
         // page만 1page로 변경하여 조회 이벤트 호출
         const searchFormT = {...searchForm};
         searchFormT.page = 1;
-        dispatch(searchClazzListSetForm(searchFormT));
+        dispatch(searchClazzesSetForm(searchFormT));
         onSearchList(searchFormT);
     };
 
@@ -52,7 +50,7 @@ const ClazzSearch = () => {
     const onChangerFormData = (e) => {
         const searchFormT = {...searchForm};
         searchFormT[e.target.id] = e.target.value;
-        dispatch(searchClazzListSetForm(searchFormT));
+        dispatch(searchClazzesSetForm(searchFormT));
     };
 
     /*
@@ -61,14 +59,14 @@ const ClazzSearch = () => {
     useEffect(() => {
         if (!searchLoading && searchError) {
             toast.error(getErrorMsg(searchError, 'search'));
-            dispatch(searchClazzListClear());
+            dispatch(searchClazzesClear());
         }
     }, [searchError]);
 
     useEffect(() => {
         if (history.action === 'PUSH') {
-            const initData = searchClazzListFormInitData();
-            dispatch(searchClazzListSetForm(initData));
+            const initData = searchClazzesFormInitData();
+            dispatch(searchClazzesSetForm(initData));
             onSearchList(initData);
         }
         // 뒤로가기로 온 경우

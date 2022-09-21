@@ -5,10 +5,7 @@ import {useHistory} from 'react-router-dom';
 import {Button, Spinner, Table} from '@components';
 import {useSelector, useDispatch} from 'react-redux';
 import {toast} from 'react-toastify';
-import {
-    searchClazzList,
-    searchClazzListSetForm
-} from '../../../store/clazzStore';
+import {searchClazzes, searchClazzesSetForm} from '../../../store/clazzStore';
 import {getErrorMsg} from '../../../lib/commonUiUtils';
 /*
  * Project 검색조건 Contanier
@@ -18,17 +15,15 @@ const ClazzTable = () => {
     const history = useHistory();
 
     const {data: searchList} = useSelector(
-        (state) => state.clazz.searchClazzListRes
+        (state) => state.clazz.searchClazzesRes
     );
-    const {searchClazzListForm: searchForm} = useSelector(
-        (state) => state.clazz
-    );
+    const {searchClazzesForm: searchForm} = useSelector((state) => state.clazz);
 
     const movePage = (page) => {
         const searchFormT = {...searchForm};
         searchFormT.page = page;
-        dispatch(searchClazzListSetForm(searchFormT));
-        dispatch(searchClazzList(searchFormT));
+        dispatch(searchClazzesSetForm(searchFormT));
+        dispatch(searchClazzes(searchFormT));
     };
 
     const onClickChange = (row) => {
@@ -41,34 +36,36 @@ const ClazzTable = () => {
     };
 
     const columns = [
-        {
-            title: '프로젝트 명',
-            key: 'projectName'
-        },
+        // {
+        //     title: '프로젝트 명',
+        //     key: 'projectName'
+        // },
 
         {
             title: '패키지 명',
+            align: 'left',
             key: 'packageName'
         },
         {
             title: '클래스 명',
+            align: 'left',
             key: 'clazzName'
         },
         {
             title: '파일 유형',
-            key: 'fileTypeName'
+            key: 'clazzType'
         },
         {
             title: '클래스 유형',
-            key: 'clazzTypeName'
+            key: 'clazzDetailType'
         },
-        {
-            title: '라인수',
-            key: 'line',
-            render: (id, row, column) => {
-                return `${row.line} Line`;
-            }
-        },
+        // {
+        //     title: '라인수',
+        //     key: 'line',
+        //     render: (id, row, column) => {
+        //         return `${row.line} Line`;
+        //     }
+        // },
         {
             title: '메서드 건수',
             key: 'snapshotCnt',
